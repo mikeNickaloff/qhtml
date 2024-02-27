@@ -8,7 +8,7 @@ Elements: Elements are defined similarly to CSS. A tag name is provided, followe
 
 **Example:**
  
-
+      <script src="qhtml.js"></script>
        <q-html>
          div {
               content: "my div";
