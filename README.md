@@ -18,10 +18,15 @@ Example:
 Attributes: Attributes are defined with a colon : and terminated by a semicolon ;. The value of the attribute is always enclosed in double quotes.
 
 Example:
-  <q-html>
-    div {
-        class: "container";
-    }
+      <q-html>
+       div {
+          class: "container";
+          content: "click the button below for a special message";
+          button {
+              onclick: "alert('hello world')";
+              content: "click me!";
+           }
+       }
   </q-html>
 
 Nesting: qHTML allows for the nesting of elements. Nested elements are defined within the curly braces of their parent element.
