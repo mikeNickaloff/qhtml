@@ -56,8 +56,18 @@ The content attribute is special in qHTML. It represents the inner HTML of an el
 Example:
 
      <q-html>
-         p {
+      p {
             content: "This is a paragraph.";
+            span {
+                   content: "And here is how to handle multiple elements... ";                   
+            } 
+           a { 
+               href:"#";
+              content: "Click here!";
+           }
+            span { 
+                 content: " and continue learning";
+            }
          }
      </q-html>
 
