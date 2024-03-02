@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QHTML Demo</title> 
     <script src="qhtml.js" type="text/javascript"></script>
+    <script src="w3-tags.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 
@@ -13,19 +14,24 @@
     <!-- Sample usage of the q-html component -->
  
  <q-html>
-        div {
+        w3-card {
             class: "w3-container";
             h1 {
                 class: "w3-title";
                 content: "q-html homepage";
             }
-            div { 
-		class: "w3-bar w3-blue tabnav";
-		 a { class: "w3-bar-item w3-button"; content: "Home"; href: "#"; onclick: "toggleTab('Home')"; } 
-		 a { class: "w3-bar-item w3-button"; content: "About"; href: "#"; onclick: "toggleTab('Download')"; } 
-		 a { class: "w3-bar-item w3-button"; content: "Download"; href: "#"; onclick: "toggleTab('About')"; } 
+            w3-bar { 
+		w3-blue {
+		   div { class: "tabnav";
+			 a { class: "w3-bar-item w3-button"; content: "Playground"; href: "#"; onclick: "toggleTab('Playground')"; } 
+			 a { class: "w3-bar-item w3-button"; content: "About"; href: "#"; onclick: "toggleTab('Download')"; } 
+			 a { class: "w3-bar-item w3-button"; content: "Download"; href: "#"; onclick: "toggleTab('About')"; } 
+			}
+		}
 	}
-        div { id: "tab_About"; class: "w3-card w3-margin w3-hide";
+        div { 
+		id: "tab_About"; 
+		class: "w3-card w3-margin w3-hide";
                	p {
 	              class: "w3-container";
                       content: "This is the About page";
@@ -36,29 +42,42 @@
 			onclick: "openModal()";
         	  }
 	  }
-	div { id: "tab_Home"; class: "w3-card w3-margin w3-hide";
-               	p {
+	div { id: "tab_Playground"; class: "w3-card w3-margin";
+               	w3-container {
 	              class: "w3-container";
-                      content: "This is the Home page.";
+                      content: "This is a playground for testing qhtml";
                	  }
+		
 		TextArea {
 			id: "qhtmlEditor";
-			onChange: "updateQHTMLFromEditor()";
+			onKeyUp: "updateQHTMLFromEditor()";
 			content: "";
 			class: "w3-large w3-input";
 		}
-		div {
-			id: "qhtmlPreview";
-			class: "w3-wide w3-card";
-		}
+		br { }
+
+		w3-large, w3-h3 {
+				div {
+					content: "Results";
+				}
+			}
+		w3-card { 
+			w3-wide {
+				div {
+					id: "qhtmlPreview";
+				}
+			}
+		 }
 	          
 	  }
-	div { id: "tab_Download"; class: "w3-card w3-margin w3-hide";
+	div { 
+		id: "tab_Download"; 
+		class: "w3-margin w3-hide";
                	p {
 	              class: "w3-container";
                       content: "Here's the contact page";
                	  }
-table { id: "maintable"; class: "w3-table w3-border-blue w3-grey w3-striped w3-text-black w3-card";
+		 table { id: "maintable"; class: "w3-table w3-border-blue w3-grey w3-striped w3-text-black w3-card";
 			th {
 			  content: "Column 1";
 			}
@@ -125,6 +144,7 @@ table { id: "maintable"; class: "w3-table w3-border-blue w3-grey w3-striped w3-t
 		}
 	   }
         }
+
     </q-html>
 
 
@@ -133,6 +153,9 @@ table { id: "maintable"; class: "w3-table w3-border-blue w3-grey w3-striped w3-t
 }
 #myModalMessage {
 	height: 30vh
+}
+q-html {
+height: 40vh;
 }
 </style>
 <script>
@@ -147,38 +170,17 @@ function closeModal() {
 document.addEventListener("QHTMLContentLoaded", function() {
    	console.log(document.querySelectorAll("button"));
 w3.displayObject('maintable', ({'column3': 'Contact'}));
-qOne("#qhtmlEditor").value = `div {
-    class: "w3-row w3-container w3-margin-top";
-    div {
-        class: "w3-third w3-justify w3-container";
-        h2 {
-            content: "Empty Notebook Found";
-        }
-        p {
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        }
-
-    }
-    div {
-        class: "w3-third w3-justify w3-container";
-
-        p {
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        }
-
-    }
-    div {
-        class: "w3-third w3-justify w3-container";
-        h2 {
-            content: "Very New News!";
-        }
-        p {
-            content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        }
-
-    }
+qOne("#qhtmlEditor").value = `w3-bar, w3-black, w3-text-white, div {
+	 w3-bar-item, w3-left {
+		span {
+			content: "Item1";
+		}
+		span {
+			content: "item 2";
+		} 
+	}
 }`
-	
+updateQHTMLFromEditor()	
 });
 
 // document.querySelector / document.querySelectorAll 
@@ -203,8 +205,13 @@ function updateQHTMLFromEditor() {
 	var qp = qOne("#qhtmlPreview");
 	qp.innerHTML = "";
 	qp.innerHTML = `<q-html>${qOne("#qhtmlEditor").value}</q-html>`;
+	//qp.querySelector("q-html").render();
+//	qp.innerHTML = qp.querySelector("q-html").innerHTML;
 	
 }
+
+
+
 
 </script>
 </body>
