@@ -77,9 +77,7 @@ Conversion to HTML:
 
 Converting qHTML to regular HTML involves:
 
-Transforming each element into its standard HTML representation.
-Placing the content attribute value as the innerHTML of the respective element.
-Mapping all other attributes directly to the element.
+Paste valid qhtml code after a &lg;q-html&gt; tag and before the corrosponding &lt;/qhtml&gt; tag.
 Example Conversion:
 
 qHTML:
