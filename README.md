@@ -96,5 +96,5 @@ Converted to HTML:
 
 
  Currently planned features:
-            style tag parsing
-            native javascript parsing
+              - style tag parsing
+              - native javascript parsing
