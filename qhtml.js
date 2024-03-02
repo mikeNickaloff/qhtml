@@ -122,38 +122,7 @@ class QHtmlElement extends HTMLElement {
     return root.innerHTML;
 }
 
-/*preprocessqhtml(input) {
-    const w3TagPattern = /(w3-[\w-]+\s+)+(?=\{)/g; // Pattern to match multiple w3-* tags followed by {
 
-	 let modifiedOpening = '';
-        let modifiedClosing = '';
-    return input.replace(w3TagPattern, (match) => {
-        const tags = match.trim().split(/\s+/); // Split the matched tags
-        modifiedOpening = '';
-        modifiedClosing = '';
-
-        tags.forEach(function(tag) {
-            modifiedOpening += ' ' + tag + ' { '; // Add an opening brace for each tag
-            modifiedClosing += '}'; // Add a closing brace for each tag
-        });
-
-        return modifiedOpening; // Return the modified opening part
-    }).replace(/\{/g, (match, offset, fullString) => {
-        // For each opening brace, find the corresponding closing brace and add the modifiedClosing before it
-        let nestedLevel = 1;
-        for (let i = offset + 1; i < fullString.length; i++) {
-            if (fullString[i] === '{') nestedLevel++;
-            if (fullString[i] === '}') nestedLevel--;
-
-            if (nestedLevel === 0) {
-                // Insert the modifiedClosing before the corresponding closing brace
-                return '{' + fullString.substring(offset + 1, i) + modifiedClosing + fullString.substring(i);
-            }
-        }
-
-        return match; // Return the original match if no modification is needed
-    });
-}  */
 
 
  
