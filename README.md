@@ -77,7 +77,7 @@ Conversion to HTML:
 
 Converting qHTML to regular HTML involves:
 
-Paste valid qhtml code after a &lg;q-html&gt; tag and before the corrosponding &lt;/qhtml&gt; tag.
+Paste valid qhtml code after a &lt;q-html&gt; tag and before the corrosponding &lt;/qhtml&gt; tag.
 Example Conversion:
 
 qHTML:
