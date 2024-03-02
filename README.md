@@ -93,3 +93,8 @@ qHTML:
 Converted to HTML:
 
             <p><center><a href="https://www.example.com">Visit Example</a></center></p>
+
+
+ Currently planned features:
+            style tag parsing
+            native javascript parsing
