@@ -1,3 +1,6 @@
+/* created by mike nickaloff
+https://www.github.com/mikeNickaloff/qhtml
+*/
 class QHtmlElement extends HTMLElement {
      constructor() {
         super();
@@ -14,6 +17,33 @@ class QHtmlElement extends HTMLElement {
     }
 
     parseQHtml(qhtml) {
+
+ 
+
+    // Function to find the matching closing brace for each opening brace and add closing braces accordingly
+    function addClosingBraces(input) {
+        let depth = 0;
+        let result = '';
+
+        for (let i = 0; i < input.length; i++) {
+            if (input[i] === '{') {
+                depth++;
+            } else if (input[i] === '}') {
+                depth--;
+                if (depth < 0) {
+                    result += '} '.repeat(-depth); // Add extra closing braces as needed
+                    depth = 0;
+                }
+            }
+            result += input[i];
+        }
+
+        return result + '} '.repeat(depth); // Add any remaining closing braces at the end
+    }
+
+ 
+    const preprocessedInput = qhtml;
+    const adjustedInput = addClosingBraces(preprocessedInput);
 
     function extractPropertiesAndChildren(input) {
         const segments = [];
@@ -63,19 +93,68 @@ class QHtmlElement extends HTMLElement {
                 parentElement.setAttribute(segment.name, segment.value);
             }
         } else if (segment.type === 'element') {
-            const newElement = document.createElement(segment.tag);
-            parentElement.appendChild(newElement);
-            const childSegments = extractPropertiesAndChildren(segment.content);
-            childSegments.forEach(childSegment => processSegment(childSegment, newElement));
+		if (segment.tag.includes(',')) {
+       		       // Split the tag by comma and trim each tag name
+                	const tags = segment.tag.split(',').map(tag => tag.trim());
+	                // Recursively create nested elements for each tag
+        	        let currentParent = parentElement;
+                	tags.forEach(tag => {
+	                    const newElement = document.createElement(tag);
+	                    currentParent.appendChild(newElement);
+	                    currentParent = newElement; // Update the current parent to the newly created element
+			  
+        	        });
+			   const childSegments = extractPropertiesAndChildren(segment.content);
+		            childSegments.forEach(childSegment => processSegment(childSegment, currentParent));
+		} else {
+	            const newElement = document.createElement(segment.tag);
+        	    parentElement.appendChild(newElement);
+	            const childSegments = extractPropertiesAndChildren(segment.content);
+	            childSegments.forEach(childSegment => processSegment(childSegment, newElement));
+		}
         }
     }
 
     const root = document.createElement('div');
-    const segments = extractPropertiesAndChildren(qhtml);
+    const segments = extractPropertiesAndChildren(adjustedInput); // Use the adjusted input
     segments.forEach(segment => processSegment(segment, root));
 
     return root.innerHTML;
 }
+
+/*preprocessqhtml(input) {
+    const w3TagPattern = /(w3-[\w-]+\s+)+(?=\{)/g; // Pattern to match multiple w3-* tags followed by {
+
+	 let modifiedOpening = '';
+        let modifiedClosing = '';
+    return input.replace(w3TagPattern, (match) => {
+        const tags = match.trim().split(/\s+/); // Split the matched tags
+        modifiedOpening = '';
+        modifiedClosing = '';
+
+        tags.forEach(function(tag) {
+            modifiedOpening += ' ' + tag + ' { '; // Add an opening brace for each tag
+            modifiedClosing += '}'; // Add a closing brace for each tag
+        });
+
+        return modifiedOpening; // Return the modified opening part
+    }).replace(/\{/g, (match, offset, fullString) => {
+        // For each opening brace, find the corresponding closing brace and add the modifiedClosing before it
+        let nestedLevel = 1;
+        for (let i = offset + 1; i < fullString.length; i++) {
+            if (fullString[i] === '{') nestedLevel++;
+            if (fullString[i] === '}') nestedLevel--;
+
+            if (nestedLevel === 0) {
+                // Insert the modifiedClosing before the corresponding closing brace
+                return '{' + fullString.substring(offset + 1, i) + modifiedClosing + fullString.substring(i);
+            }
+        }
+
+        return match; // Return the original match if no modification is needed
+    });
+}  */
+
 
  
 }
@@ -86,11 +165,13 @@ customElements.define('q-html', QHtmlElement);
 
 window.addEventListener("DOMContentLoaded", function() {
 	var elems = document.querySelectorAll("q-html")
-elems.forEach(function(elem) { 
-	elem.render();
-})
-var qhtmlEvent = new CustomEvent('QHTMLContentLoaded', {
-    });
-document.dispatchEvent(qhtmlEvent);
+	elems.forEach(function(elem) { 
+		elem.render();
+	})
+	var qhtmlEvent = new CustomEvent('QHTMLContentLoaded', { });
+	document.dispatchEvent(qhtmlEvent);
 
  })
+
+
+
