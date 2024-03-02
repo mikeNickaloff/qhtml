@@ -90,7 +90,11 @@ class QHtmlElement extends HTMLElement {
             if (segment.name === 'content' || segment.name === 'contents') {
                 parentElement.innerHTML = segment.value;
             } else {
-                parentElement.setAttribute(segment.name, segment.value);
+		if (segment.name === 'style' || segment.name === 'script') {
+
+		} else {
+	                parentElement.setAttribute(segment.name, segment.value);
+		}
             }
         } else if (segment.type === 'element') {
 		if (segment.tag.includes(',')) {
@@ -121,7 +125,6 @@ class QHtmlElement extends HTMLElement {
 
     return root.innerHTML;
 }
-
 
 
 
