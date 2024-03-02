@@ -73,21 +73,21 @@ Example:
 
 All other attributes are directly mapped to HTML attributes. For instance, class, id, href, etc., work the same as in HTML.
 
-Conversion to HTML:
+Nesting aliases
 
-Converting qHTML to regular HTML involves:
+You can nest multiple tags for convenience using a comma
 
-Paste valid qhtml code after a &lt;q-html&gt; tag and before the corrosponding &lt;/q-html&gt; tag.
-Example Conversion:
+Example:
 
 qHTML:
 
        <q-html>
-        a {
+        p,center,a {
           href: "https://www.example.com";
           content: "Visit Example";
         }
        </q-html>
 
 Converted to HTML:
-<a href="https://www.example.com">Visit Example</a>
+
+            <p><center><a href="https://www.example.com">Visit Example</a></center></p>
