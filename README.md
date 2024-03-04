@@ -1,14 +1,14 @@
 I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
-qHTML is a simplified, custom representation of HTML designed for ease of reading and maintainence. Its structure and syntax are similar to CSS, but instead of styles, it defines HTML structure and attributes inline. 
+- qHTML is a simplified, custom representation of HTML designed for ease of reading and maintainence. Its structure and syntax are similar to CSS, but instead of styles, it defines HTML structure and attributes inline. 
 
-qHTML is a custom component, so there is no boilerplate code or javascript API required. 
+- qHTML is a custom component, so there is no boilerplate code or javascript API required. 
 
-You just place your qHTML within a q-html tag and like magic, it transforms into regular inline HTML automatically. 
+- You just place your qHTML within a q-html tag and like magic, it transforms into regular inline HTML automatically. 
 
-Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
+- Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
 
-For Demo and code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
+- For Demo and code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
 
 **Basic Structure:**
 
@@ -63,15 +63,15 @@ Example:
 
 Important Points:
 
-The content attribute is special in qHTML. It represents the inner text of an element.
+- The content/text attribute is special in qHTML. It represents the inner text of an element.
 
-All properties are surrounded with double-quotes and cannot contain any CSS code.
+- All properties are surrounded with double-quotes and cannot contain any CSS code.
+- Scripts do not require a 'text' or 'content' property.
 
-Style attributes are ignored and scripts cannot be used directly from qHTML except as inline properties. 
+- Style attributes are ignored 
 
-If you need to access the generated HTML on page load you can  use the QHTMLContentLoaded event which is called from the document itself after the page finishes loading the QHTML.
-
-For all others, you just access the QHTML elements as if they were normal HTML tags.
+- Scripts behave the same as any other script tags, supporting defer, inline, and immediate execution. 
+- Modules are not supported.
 
 Example:
 
@@ -90,26 +90,24 @@ Example:
                  id: "mySpan"
                  content: " and continue learning"
             }
+           
          }
+          script {
+
+             function myFunction() {  
+                  document.querySelector("#mySpan").innerText = " " + Math.random() * 65535; 
+                  alert("clicked!"); 
+              }
+           }
+         
      </q-html>
 
-     <script>
-       // to access QHTML elements, just access them in the same way as any other HTML elements.
-      function myFunction() {  
-                               document.querySelector("#mySpan").innerText = "Clicked!"; 
-                               alert("hello world!"); 
-                             }
-                             
-      // on document load if you want to access the HTML immediately use QHTMLContentLoaded
-      document.addEventListener("QHTMLContentLoaded", function() {
-            document.querySelectorAll("#mySpan").forEach(function(elem) {  elem.innerText = "Soon!" })
-      })
-     </script>
+
 
 
 Simplified Nesting
 
-You can nest multiple tags for convenience using a comma
+- You can nest multiple tags for convenience using a comma
 
 Example:
 
