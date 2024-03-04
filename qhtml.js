@@ -11,10 +11,21 @@ class QHtmlElement extends HTMLElement {
     }
 
     render() {
-        const qhtmlContent = this.textContent.trim();
+        const qhtmlContent = this.preprocess(this.textContent.trim());
         const htmlContent = this.parseQHtml(qhtmlContent);
         this.innerHTML = htmlContent;  // Modify this line
     }
+
+    preprocess(i_qhtml) {
+       function addSemicolonToProperties(input) {
+	  const regex = /(\w+)\s*:\s*("[^"]*")(?!;)/g;
+	  return input.replace(regex, "$1: $2;");
+	}
+        let preprocessedInput = addSemicolonToProperties(i_qhtml);
+
+	return preprocessedInput;
+    }
+
 
     parseQHtml(qhtml) {
 
