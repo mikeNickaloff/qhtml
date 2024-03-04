@@ -31,6 +31,8 @@ You can also use the content attribute on any tag to set the "textContent" of th
 
 Inline attributes like onclick, onmouseover, etc  work as well.
 
+Nesting is also supported by simply adding additional tags into existing tags between the { curley braces }
+
 
 Example:
    
@@ -46,20 +48,6 @@ Example:
                }
            }
       </q-html>
-
-Nesting: qHTML allows for the nesting of elements. Nested elements are defined within the curly braces of their parent element.
-
-Example:
-
-     <q-html>
-        div {
-            class: "container"
-            p {
-               content: "This is a paragraph inside a div."
-            }
-       }
-    
-     </q-html>
 
 
   Result:  
