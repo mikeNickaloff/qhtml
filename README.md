@@ -1,4 +1,4 @@
-I**ntroduction to Quick HTML: * The Quick Inline HyperText Markup Language***
+I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 qHTML is a simplified, custom representation of HTML designed for ease of reading and maintainence. Its structure and syntax are similar to CSS, but instead of styles, it defines HTML structure and attributes inline. 
 
@@ -12,7 +12,8 @@ For Demo and code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.h
 
 **Basic Structure:**
 
-Elements: Elements are defined similarly to CSS. A tag name is provided, followed by a pair of curly braces {}. Within the curly braces, the attributes and nested elements are defined.
+
+- Elements: Elements are defined similarly to CSS. A tag name is provided, followed by a pair of curly braces {}. Within the curly braces, the attributes and nested elements are defined.
 
 **Example:**
  
@@ -27,17 +28,14 @@ Elements: Elements are defined similarly to CSS. A tag name is provided, followe
            }
          </q-html>
 
-Attributes: Attributes are defined  by specifying the attribute name followed by a colon (:) followed by the value surrrounded in double quotes. 
+- Attributes: Attributes are defined  by specifying the attribute name followed by a colon (:) followed by the value surrrounded in double quotes. 
 
-The value should be in the same form as traditional inline HTML tags -- style attributes are not allowed inside of qHTML -- they must be provided in a seperate style tag outside of the qhtml. 
-
-Any other attributes can as long as they are valid. 
-
-You can also use the content attribute on any tag to set the "textContent" of that tag. (not the HTML content).
-
-Inline attributes like onclick, onmouseover, etc  work as well.
-
-Nesting is also supported by simply adding additional tags into existing tags between the { curley braces }
+- The value should be in the same form as traditional inline HTML tags -- style attributes are not allowed inside of qHTML -- they must be provided in a seperate style tag outside of the qhtml. 
+- All attributes are supported as long as they are valid attributes for a specific tag. 
+- You can also use the content attribute on any tag to set the "textcontent" of that tag. (not the HTML content).
+- other ways to set text content are through the 'contents', 'text', 'textcontents', and 'innertext' keywords.
+- Inline attributes like onclick, onmouseover, etc  work as well.
+- Nesting is also supported by simply adding additional tags into existing tags between the { curley braces }
 
 
 Example:
