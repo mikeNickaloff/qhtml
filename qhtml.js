@@ -102,7 +102,9 @@ class QHtmlElement extends HTMLElement {
                 parentElement.innerHTML = segment.value;
             } else {
 		if (segment.name === 'style' || segment.name === 'script') {
-
+                   // todo:
+		   //  create new segment.name tag outside of q-html since scripts and style tags do not adhere to their HTML scope
+		   //    and set contents -- if script will have to execute it and if style will have to apply it
 		} else {
 	                parentElement.setAttribute(segment.name, segment.value);
 		}
