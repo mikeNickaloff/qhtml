@@ -4,11 +4,14 @@ https://www.github.com/mikeNickaloff/qhtml
 class QHtmlElement extends HTMLElement {
      constructor() {
         super();
+	this.initMutationObserver();
     }
 
     connectedCallback() {
         this.render();
     }
+
+
 
     render() {
         const qhtmlContent = this.preprocess(this.textContent.trim());
@@ -102,9 +105,7 @@ class QHtmlElement extends HTMLElement {
                 parentElement.innerHTML = segment.value;
             } else {
 		if (segment.name === 'style' || segment.name === 'script') {
-                   // todo:
-		   //  create new segment.name tag outside of q-html since scripts and style tags do not adhere to their HTML scope
-		   //    and set contents -- if script will have to execute it and if style will have to apply it
+
 		} else {
 	                parentElement.setAttribute(segment.name, segment.value);
 		}
@@ -124,10 +125,22 @@ class QHtmlElement extends HTMLElement {
 			   const childSegments = extractPropertiesAndChildren(segment.content);
 		            childSegments.forEach(childSegment => processSegment(childSegment, currentParent));
 		} else {
-	            const newElement = document.createElement(segment.tag);
-        	    parentElement.appendChild(newElement);
-	            const childSegments = extractPropertiesAndChildren(segment.content);
-	            childSegments.forEach(childSegment => processSegment(childSegment, newElement));
+
+		   const newElement = document.createElement(segment.tag);
+		 
+                   if (segment.tag === 'script') { 
+		      	
+				storeAndExecuteScriptLater(segment.content)
+				newElement.text = segment.content;
+		    	        parentElement.appendChild(newElement);
+			
+		   } else {
+	            
+        	   
+		            const childSegments = extractPropertiesAndChildren(segment.content);
+		            childSegments.forEach(childSegment => processSegment(childSegment, newElement));
+                              parentElement.appendChild(newElement);
+	           }
 		}
         }
     }
@@ -141,22 +154,58 @@ class QHtmlElement extends HTMLElement {
 
 
 
+initMutationObserver() {
+    // Create an observer instance linked to a callback function
+    const observer = new MutationObserver((mutationsList, observer) => {
+      // For each mutation, check if the type is 'childList', indicating added or removed nodes
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          // Emit a custom event signaling the innerHTML change
+          this.dispatchEvent(new CustomEvent('contentChanged', {
+            detail: { message: 'Content has changed' }
+          }));
+        }
+      }
+    });
+
+    // Start observing the target node for configured mutations
+    observer.observe(this, { childList: true, subtree: true });
+  }
+
+
  
 }
 
 // Define the new element
 customElements.define('q-html', QHtmlElement);
 
+function storeAndExecuteScriptLater(scriptContent) {
+  // Store the script content in a closure
+  function deferredExecution() {
+    try {
+      var scriptFunction = new Function(scriptContent);
+	var newElement = document.createElement("script");
+	newElement.text = scriptContent;
+        document.body.appendChild(newElement);
+    } catch (error) {
+      console.error('script execution error:', error);
+    }
+  }
+
+  // Use setTimeout to defer execution
+  setTimeout(deferredExecution, 0);
+}
 
 window.addEventListener("DOMContentLoaded", function() {
 	var elems = document.querySelectorAll("q-html")
 	elems.forEach(function(elem) { 
+
 		elem.render();
+
 	})
 	var qhtmlEvent = new CustomEvent('QHTMLContentLoaded', { });
 	document.dispatchEvent(qhtmlEvent);
 
  })
-
 
 
