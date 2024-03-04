@@ -2,7 +2,11 @@ I**ntroduction to Quick HTML: * The Quick Inline HyperText Markup Language***
 
 qHTML is a simplified, custom representation of HTML designed for ease of reading and maintainence. Its structure and syntax are similar to CSS, but instead of styles, it defines HTML structure and attributes inline. 
 
-qHTML is a custom component, so there is no boilerplate code or javascript API required. You just use a q-html tag and put the qHTML code right inside and like magic, it transforms into regular inline HTML in place. Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline properties without having to even interact with qHTML. 
+qHTML is a custom component, so there is no boilerplate code or javascript API required. 
+
+You just place your qHTML within a q-html tag and like magic, it transforms into regular inline HTML automatically. 
+
+Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
 
 For Demo and code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
 
