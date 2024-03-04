@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
     <title>QHTML Demo</title> 
-    <script src="qhtml.js" type="text/javascript"></script> <!-- required:  provides functionality to handle q-html code -->
-	<script src="w3-tags.js" type="text/javascript"></script> <!-- optional: but adds convenience tags that work with qhtml -->
-        <link rel="stylesheet" href="w3.css"><!-- required if you include w3-tags.js -->
-	
-   <script src="https://www.w3schools.com/lib/w3.js"></script> <!-- optional: only used in demo-->
+    <script src="qhtml.js" type="text/javascript"></script>
+    <script src="w3-tags.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 <body>
@@ -43,17 +41,17 @@
 			onclick: "openModal()";
         	  }
 	  }
-	div { id: "tab_Playground"; class: "w3-card w3-margin";
+	div { id: "tab_Playground"; class: " w3-margin";
                	w3-container {
 	              class: "w3-container";
                       content: "This is a playground for testing qhtml";
                	  }
-		
+		p { content: "Enter your qHTML Code below" }
 		TextArea {
 			id: "qhtmlEditor";
 			onKeyUp: "updateQHTMLFromEditor()";
 			content: "";
-			class: "w3-large w3-input";
+			class: "w3-card w3-large w3-input";
 		}
 		br { }
 
@@ -86,7 +84,7 @@
 			  content: "Column 2";
 			}
 			th {
-			  content: "{{column3}}";
+			  content: "column3";
 			}
 			tr {
 				td { content: "asdf"; }
@@ -131,7 +129,7 @@
 
 			}
 			span {
-				content: "Dialog";
+				content: "and an extra span for kicks";
 			}
 	            }
 		    div {
@@ -150,16 +148,20 @@
 
 
 <style> 
-#myModalContent {
-}
-#myModalMessage {
-	height: 30vh
-}
-q-html {
-height: 40vh;
-}
+	#myModalContent {
+	}
+	#myModalMessage {
+		height: 30vh
+	}
+
+	textarea {
+		min-height: 40vh;
+	}
 </style>
 <script>
+
+/* modal dialog */
+
 function openModal() {
 	document.querySelector("#myModal").style.display = 'block';
 }
@@ -168,25 +170,30 @@ function closeModal() {
 }
 
 
+/* Playground initial code */
+
 document.addEventListener("QHTMLContentLoaded", function() {
-   	console.log(document.querySelectorAll("button"));
-w3.displayObject('maintable', ({'column3': 'Contact'}));
-qOne("#qhtmlEditor").value = `w3-bar, w3-black, w3-text-white, div {
-	 w3-bar-item, w3-left {
-		span {
-			content: "Item1";
+	qOne("#qhtmlEditor").value = `w3-bar, w3-black, w3-text-white, div {
+		 w3-bar-item, w3-left {
+			span {
+				content: "Item1";
+			}
+			span {
+				content: "item 2";
+			} 
 		}
-		span {
-			content: "item 2";
-		} 
-	}
-}`
-updateQHTMLFromEditor()	
+	    }`
+	    updateQHTMLFromEditor()	
 });
 
+
 // document.querySelector / document.querySelectorAll 
+// convenience aliases
+
 function qOne(sel) { return document.querySelector(sel); }
 function qAll(sel) { return document.querySelectorAll(sel) }
+
+/* Tab handling */
 
 // tranform DOM Element List into Javascript Array and map the result of func(element) for each element
 function mapFunc(list, func) {
@@ -202,12 +209,16 @@ function toggleTab(tabName) {
 	     qOne(obj.tab).className = obj.name == tabName ? "w3-card w3-margin" : "w3-card w3-margin w3-hide"; 
 	})
 }
+
+/* end of tabs handling */
+
+/* playground editor update Results div */
+
 function updateQHTMLFromEditor() {
 	var qp = qOne("#qhtmlPreview");
 	qp.innerHTML = "";
 	qp.innerHTML = `<q-html>${qOne("#qhtmlEditor").value}</q-html>`;
-	//qp.querySelector("q-html").render();
-//	qp.innerHTML = qp.querySelector("q-html").innerHTML;
+
 	
 }
 
