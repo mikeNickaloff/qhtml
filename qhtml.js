@@ -98,7 +98,7 @@ class QHtmlElement extends HTMLElement {
 
     function processSegment(segment, parentElement) {
         if (segment.type === 'property') {
-            if (segment.name === 'content' || segment.name === 'contents') {
+            if (segment.name === 'content' || segment.name === 'contents' || segment.name === 'text' || segment.name === 'textcontent' || segment.name === 'textcontents' || segment.name === 'innertext') {
                 parentElement.innerHTML = segment.value;
             } else {
 		if (segment.name === 'style' || segment.name === 'script') {
