@@ -30,7 +30,7 @@ I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 - Attributes: Attributes are defined  by specifying the attribute name followed by a colon (:) followed by the value surrrounded in double quotes. 
 
-- The value should be in the same form as traditional inline HTML tags -- style attributes are not allowed inside of qHTML -- they must be provided in a seperate style tag outside of the qhtml. 
+- The value should be in the same form as traditional inline HTML tags
 - All attributes are supported as long as they are valid attributes for a specific tag. 
 - You can also use the content attribute on any tag to set the "textcontent" of that tag. (not the HTML content).
 - other ways to set text content are through the 'contents', 'text', 'textcontents', and 'innertext' keywords.
@@ -65,11 +65,8 @@ Important Points:
 
 - The content/text attribute is special in qHTML. It represents the inner text of an element.
 
-- All properties are surrounded with double-quotes and cannot contain any CSS code.
+- All properties are surrounded with double-quotes and can have anything within the quotes
 - Scripts do not require a 'text' or 'content' property.
-
-- Style attributes are ignored 
-
 - Scripts behave the same as any other script tags, supporting defer, inline, and immediate execution. 
 - Modules are not supported.
 
@@ -116,7 +113,7 @@ qHTML:
        <q-html>
          p,center,a {
            href: "https://www.example.com"
-           content: "Visit Example"
+           text: "Visit Example"
         }
        </q-html>
 
@@ -126,6 +123,5 @@ Converted to HTML:
 
 
  Currently planned features for later release:
- 
-- style tag parsing
-- native javascript parsing
+
+ - Re-usable Custom Component definitions from q-html
