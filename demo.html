@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
     <title>QHTML Demo</title> 
-    <script src="qhtml.js" type="text/javascript"></script>
-    <script src="w3-tags.js" type="text/javascript"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="qhtml.js" type="text/javascript"></script> <!-- required for q-html parsing -->
+    <script src="w3-tags.js" type="text/javascript"></script> <!-- optional w3-tags addon -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!--  w3-tags.js dependency -->
 
 </head>
 <body>
-    <!-- Sample usage of the q-html component -->
- 
+    <!-- Sample usage of the q-html component to make the whole page -->
+
  <q-html>
+	
         w3-card {
             class: "w3-container";
             h1 {
@@ -169,26 +170,8 @@ function closeModal() {
 	document.querySelector("#myModal").style.display = 'none';
 }
 
-
-/* Playground initial code */
-
-document.addEventListener("QHTMLContentLoaded", function() {
-	qOne("#qhtmlEditor").value = `w3-bar, w3-black, w3-text-white, div {
-		 w3-bar-item, w3-left {
-			span {
-				text: "Item1"
-			}
-			span {
-				text: "item 2"
-			} 
-		}
-	    }`
-	    updateQHTMLFromEditor()	
-});
-
-
 // document.querySelector / document.querySelectorAll 
-// convenience aliases
+// convenience aliases not part of qhtml
 
 function qOne(sel) { return document.querySelector(sel); }
 function qAll(sel) { return document.querySelectorAll(sel) }
@@ -196,6 +179,7 @@ function qAll(sel) { return document.querySelectorAll(sel) }
 /* Tab handling */
 
 // tranform DOM Element List into Javascript Array and map the result of func(element) for each element
+// used only for tab switching not part of qhtml
 function mapFunc(list, func) {
 	var tmap = [];
 	list.forEach(function(tm) { tmap.push(tm) })
@@ -212,6 +196,67 @@ function toggleTab(tabName) {
 
 /* end of tabs handling */
 
+
+/* Playground initial code
+    triggers after qhtml has been parsed for main page
+ */
+
+document.addEventListener("QHTMLContentLoaded", function() {
+
+//set the demo playground default code
+	qOne("#qhtmlEditor").value = `
+w3-bar, w3-black, w3-text-white, div {
+    w3-bar-item, w3-left {
+        span {
+            text: "Item1"
+        }
+        span {
+            text: "item 2"
+        }
+
+    }
+}
+w3-container, w3-large, w3-title {
+    w3-header,w3-xlarge,w3-green,div {
+        text: "Hello world"
+    }
+}
+w3-twothird,w3-article, w3-panel, w3-light-grey, blockquote {
+      w3-justify,article {
+            p { 
+                text: "Heres a great article about saying hello to the
+                        world. only the way everybody else does it -- by
+                        saying hello world... only in latin... "
+              }
+      }
+}
+w3-quarter, w3-nav, w3-col, w3-right, w3-padding,div {
+         w3-list,w3-block,ul {
+               w3-bar {
+                  w3-green {
+                     w3-bar-item {
+                          li { text: "navigation" }
+                      }
+                    }
+                   w3-black,w3-center {
+                      w3-bar-item {
+                         li { text: "item 1" }
+                         li { text: "item 2" }
+                         li { text: "item 3" }  
+                      }
+                   }
+                }
+           }
+   }
+
+`
+
+// end of demo playground code
+
+		
+	    updateQHTMLFromEditor()	// update the result div
+});
+
 /* playground editor update Results div */
 
 function updateQHTMLFromEditor() {
@@ -221,6 +266,10 @@ function updateQHTMLFromEditor() {
 
 	
 }
+
+
+
+
 
 
 
