@@ -15,7 +15,9 @@ class QHtmlElement extends HTMLElement {
         const qhtmlContent = this.preprocess(this.textContent.trim());
 
         const htmlContent = this.parseQHtml(qhtmlContent);
-        this.innerHTML = htmlContent; // Modify this line
+		
+			const regex = /"{1}([^\"]*)"{1}/mg;
+        this.innerHTML = htmlContent.replace(regex, (match, p1) => `"${decodeURIComponent(p1)}"`); // Modify this line
     }
 
     preprocess(i_qhtml) {
@@ -62,7 +64,36 @@ class QHtmlElement extends HTMLElement {
 
             return result + '} '.repeat(depth); // Add any remaining closing braces at the end
         }
-        const preprocessedInput = qhtml;
+		
+		function preprocess(i_qhtml) {
+			const regex = /"{1}([^\"]*)"{1}/mg;
+
+// Alternative syntax using RegExp constructor
+// const regex = new RegExp('[^\\:]+:[^\\"]+"{1}(1:[^\\"]*)"{1}', 'mg')
+
+
+let m;
+var new_qhtml = i_qhtml.replace(regex, (match, p1) => `"${encodeURIComponent(p1)}"`);
+while ((m = regex.exec(i_qhtml)) !== null) {
+    // This is necessary to avoid infinite loops with zero-width matches
+    if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+    }
+    
+    // The result can be accessed through the `m`-variable.
+	//console.log(m);
+    m.forEach((match, groupIndex) => {
+			
+				console.log(`Found	 match, group ${groupIndex}: ${match}`);
+		
+		
+    });
+	
+}
+
+	return new_qhtml;
+		}
+        const preprocessedInput = preprocess(qhtml);
         const adjustedInput = addClosingBraces(preprocessedInput);
 
         function extractPropertiesAndChildren(input) {
@@ -124,7 +155,7 @@ class QHtmlElement extends HTMLElement {
         function processSegment(segment, parentElement) {
             if (segment.type === 'property') {
                 if (segment.name === 'content' || segment.name === 'contents' || segment.name === 'text' || segment.name === 'textcontent' || segment.name === 'textcontents' || segment.name === 'innertext') {
-                    parentElement.innerHTML = segment.value;
+                    parentElement.innerHTML = decodeURIComponent(segment.value);
                 } else {
                     if (segment.name === 'style' || segment.name === 'script') {
                         parentElement.setAttribute(segment.name, segment.value);
