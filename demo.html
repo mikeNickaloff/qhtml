@@ -19,10 +19,12 @@
             h1 {
                 class: "w3-title";
             }
+	 br { }
 	   a {
-	            href: "github.io/mikeNickaloff/qhtml"
-                     content: "github page";
-		}
+	       id: "downloadLink"
+		content: "visit github page"
+	   }
+	
             w3-bar { 
 		w3-blue {
 		   div { class: "tabnav";
@@ -206,6 +208,8 @@ function toggleTab(tabName) {
 
 document.addEventListener("QHTMLContentLoaded", function() {
 
+
+	qOne("#downloadLink").setAttribute("href", "https://github.io/mikeNickaloff/qhtml")
 //set the demo playground default code
 	qOne("#qhtmlEditor").value = `
 w3-bar, w3-black, w3-text-white, div {
