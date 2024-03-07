@@ -65,34 +65,12 @@ class QHtmlElement extends HTMLElement {
             return result + '} '.repeat(depth); // Add any remaining closing braces at the end
         }
 		
-		function preprocess(i_qhtml) {
-			const regex = /"{1}([^\"]*)"{1}/mg;
-
-// Alternative syntax using RegExp constructor
-// const regex = new RegExp('[^\\:]+:[^\\"]+"{1}(1:[^\\"]*)"{1}', 'mg')
-
-
-let m;
-var new_qhtml = i_qhtml.replace(regex, (match, p1) => `"${encodeURIComponent(p1)}"`);
-while ((m = regex.exec(i_qhtml)) !== null) {
-    // This is necessary to avoid infinite loops with zero-width matches
-    if (m.index === regex.lastIndex) {
-        regex.lastIndex++;
-    }
-    
-    // The result can be accessed through the `m`-variable.
-	//console.log(m);
-    m.forEach((match, groupIndex) => {
+	function preprocess(i_qhtml) {
+		const regex = /"{1}([^\"]*)"{1}/mg;
+		var new_qhtml = i_qhtml.replace(regex, (match, p1) => `"${encodeURIComponent(p1)}"`);
+		return new_qhtml;
 			
-				console.log(`Found	 match, group ${groupIndex}: ${match}`);
-		
-		
-    });
-	
-}
-
-	return new_qhtml;
-		}
+	}
         const preprocessedInput = preprocess(qhtml);
         const adjustedInput = addClosingBraces(preprocessedInput);
 
