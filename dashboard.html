@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="q-html official site" content="width=device-width">
+    <title>q-html official site</title>
+	
+<script src="qhtml.js" type="text/javascript"></script> <!-- required for q-html parsing -->
+
+<script src="w3-tags.js" type="text/javascript"></script> <!-- optional w3-tags addon -->
+<script src="bs-tags.js" type="text/javascript"></script> <!-- optional bootstrap tags addon (bs-tags) -->
+<link rel="stylesheet" href="w3.css"> <!--  w3-tags.js dependency -->
+<link rel="stylesheet" href="bs.css"> <!--  bs-tags.js dependency -->
+
+<script src="tech-tags.js" type="text/javascript"></script> <!-- optional tech-tags addon -->
+<script type="module">
+	/* register the tech-panel paint worklet for tech-tags.js */
+	CSS.paintWorklet.addModule("tech-panel-worklet.js");
+</script>
+
+    </head>
+	<body style="background-color:#607d8b!important">
+	
+	<!-- start q-html -->
+	<q-html>
+	w3-main,w3-container,w3-grey,div {
+		id: "main-div";
+		style: "width: 99vw; height: auto; background-color: lightgrey";
+		
+		
+		w3-row,w3-container,div {
+		     id: "main-layout-container";
+			style: "height: 100%; width: 100%; display: flex;";
+			
+					w3-panel,w3-header,w3-green,w3-quarter,w3-left,div {
+						  
+						 
+						
+						 style: "margin-left: -3vw; margin-top: -1vh; height: 100%;";
+						 
+						 w3-column,div {
+							tech-border-color: "black";
+							tech-shadow-color: "white";
+							tech-width: "0px";
+							tech-top-right: "20px 20px";
+							style: "height: 100vh; width: 100%; margin-top: 5vh; padding-top: 2vh;";
+							
+							w3-center,w3-padding,tech-panel {
+									style: "margin-top: 5vh; padding: 5vh;";
+									tech-shadow-color: "white";
+									tech-border-color: "black";
+									tech-top-dent: "3px";
+									tech-width: "0px";
+									tech-top-dent-length: "5%";
+									tech-top-right: "5px";
+									tech-top-left: "5px";
+									tech-bottom-right: "5px";
+									tech-bottom-left: "5px";
+									w3-padding-16,w3-row,w3-justify {
+									
+									div {
+											
+											tech-top-right: "20px";
+											tech-top-left: "20px";
+											w3-center {
+												span {
+													style: "margin-left: 20%";
+													text: "🏠"
+												}
+												a { 
+													style: "margin-right: 10%; margin-left: 10%;";
+													text: "️Welcome"
+													onclick: "setContentPanel('Welcome')";
+													href: "javascript:void(0)"
+												}
+											}
+											
+									}
+										
+										div {
+											w3-center {
+												span {
+													style: "margin-left: 22%";
+													text: "ℹ️ "
+												}
+												span { 
+													style: "margin-right: 9%; margin-left: 12%;";
+													text: "️  Support"
+												}
+											}
+											
+										}
+										div {
+											w3-center {
+												span {
+													style: "margin-left: 20%";
+													text: "📥"
+												}
+												span { 
+													style: "margin-right: 10%; margin-left: 10%;";
+													text: "️ Download"
+												}
+											}
+										}	
+									
+								
+										div {
+											w3-center {
+												span {
+													style: "margin-left: 20%";
+													text: "🗨"
+												}
+												span { 
+													style: "margin-right: 10%; margin-left: 10%;";
+													text: "️ Contribute"
+												}
+											}
+										}
+										
+											div {
+												w3-center {
+													span {
+														style: "margin-left: 20%";
+														text: "📝"
+													}
+													span { 
+														style: "margin-right: 10%; margin-left: 10%;";
+														text: "️ Examples"
+													}
+												}
+											}
+											div {
+												w3-center {
+													span {
+														style: "margin-left: 20%";
+														text: "✂️";
+													}
+													span {
+														style: "margin-right: 10%; margin-left: 10%;";
+														text: " Snippets";
+													}
+												}
+											}
+												
+											}	
+											
+										}
+									}
+							}
+					   
+		infomation { comment: "***Here is the container for the main area on the right including the heading****"; }
+				 
+				 
+				 
+			w3-container,w3-content,w3-grey,w3-rest,tech-panel,div {
+			
+			  	 style: "background: paint(tech-panel);  --tech-border-color: white; --tech-shadow-color: green; --tech-width: 1px; --tech-top-left: 20px 20px; height: 100%; width: 100%; margin-left: -2%";
+				div { 
+					style: "height: 24%; width: 100%;";
+				
+					w3-column,div {
+					   
+						style: "height: 100%; width: 102%;  margin-left: -1%;";			
+						
+						div {
+					
+							style: "width: 100%; height: 30%";
+							tech-panel {
+								style: "width: 70vh;"
+								tech-border-color: "white"
+								tech-shadow-color: "green"
+								tech-width: "1px"
+								tech-top-left: "20px 20px"
+								tech-bottom-left: "0px 0px";
+								tech-top-right: "20px 20px"
+								tech-bottom-right: "0px 0px";
+								w3-bar,w3-display-container,div {
+									style: "width: 100%; height: 100%";
+									
+									w3-display-topleft,w3-bar-item,div {
+								
+										style: "width: 25%; height: 50%";
+									
+										w3-label,w3-text-white,div {
+											text: "Search";
+								
+											w3-input,input {
+										
+											}		
+										}
+									}
+								
+									w3-display-topright,w3-bar-item,div {
+										id: "mainWindowLoginStatus";
+										w3-center,span {
+											text: "Logged in as";
+										}
+										br { }
+										w3-center,w3-bold,span {
+											text: "user@domain.com";
+										}
+									}
+									w3-display-bottomleft,div {
+								       style: "width: 100%;";
+										blockquote {
+											w3-text-green,w3-title,w3-padding-top-32,w3-padding-right-32,h1 {
+												text: "&lt;/q-html&gt;";
+											}
+										}
+										 
+									}
+								}
+							}
+							
+							
+						}
+						
+						
+						w3-blue-grey,w3-panel,w3-card,div {
+								id: "contentPanelParent"
+								tech-border-color: "white"
+								tech-shadow-color: "green"
+								tech-width: "1px"
+								tech-top-left: "00px 00px"
+								tech-bottom-left: "0px 0px";
+								tech-top-right: "0px 0px"
+								tech-bottom-right: "0px 0px";
+								tech-top-dent: "10px";
+								tech-top-dent-length: "10%";
+								 style: "margin-left: 5%; background: paint(tech-panel);  --tech-border-color: white; --tech-shadow-color: green; --tech-width: 1px; --tech-top-left: 00px 00px; height:auto; width: 90%;";
+							
+								div {
+									id: "contentPanel_Welcome"
+								h2  {
+										text: "Welcome";
+									}
+									article {
+									
+									
+										text: "Hello and welcome to the q-html home page. Here you can find many different resources relating to q-html, the quick and easy way to create HTML that saves time, effort, and improves readability for developers and search engines. ";
+										
+									}
+									br { }
+									article {
+										text: "If you are like me, you are probably asking yourself: "
+										i { 
+											text: " How does it work? "
+										}
+									}
+									article {
+										text: "The answer is actually very simple -- it just works. Unlike many modern scripting languages, q-html is intentionally simple. "
+										
+										
+									}
+									br { }
+									article {
+									  text: "Lets start off with an example q-html element to demonstrate. "
+									}
+									h3 { 
+											text: "Basic usage"
+									}
+									blockquote {
+										w3-label,span {
+											text: "Simple button with hello world alert message on click"
+										}
+										w3-input,textarea {
+											style: "min-height: 170px"
+											id: "welcomeExample01qhtmlCodeBox"
+											
+											
+										}
+										br { }
+										w3-label,span {
+											text: "Resulting q-html code"
+										}
+										w3-card,w3-white,div {
+											style: "min-height: 170px; padding: 12px";
+											button {
+												text: "Click Here!"
+												onclick: "alert('Hello world!')"
+											}	
+										}
+									}
+										br { }
+										br { }
+										h3 { 
+											text: "Nesting and Combining Tags"
+										}
+										article { 
+											text: "q-html conveniently allows for any inline attribute to be attached to any element in a declarative, simple way. Nesting is fully supported using brackets and by combining multiple tags together."
+										}
+										blockquote {
+										   w3-label,span {
+												text: "Nested elements and combined Elements"
+											}
+											w3-input,textarea {
+												style: "min-height: 240px"
+												id: "welcomeExample02qhtmlCodeBox"
+											}
+											br { }
+											w3-label,span {
+												text: "Resulting q-html code"
+											}	
+											w3-card,w3-white,div {
+												style: "min-height: 220px; padding: 12px;";
+												div {
+													style: "width: 120px; background-color: blue";
+													text: "Here's a Container div";
+													br { }
+													a {
+														href: "#"
+														onclick: "alert('hello world!')"
+														text: "Click here"
+													}
+													br { }
+													a,button {
+														href: "#"
+														onclick: "alert('hello world!')"
+														text: "or here!"
+													}
+												}
+											}	
+										}
+										
+										br { }
+										br { }
+										h3 { 
+											text: "w3-tags.js addon"
+										}
+										article { 
+											text: "q-html has an extremely powerful addon, made by the same author, called w3-tags.js. This addon turns q-html into an easy-to-use web building tool. To learn more about w3.css visit "
+											a {
+												href: "https://www.w3schools.com/w3css/default.asp";
+												text: "https://www.w3schools.com/w3css/";
+											}
+										}
+										blockquote {
+										   w3-label,span {
+												text: "Creating a form with w3.css classes using w3-tags.js";
+											}
+											w3-input,textarea {
+												style: "min-height: 240px"
+												id: "welcomeExample03qhtmlCodeBox"
+											}
+											br { }
+											w3-label,span {
+												text: "Resulting q-html code"
+											}	
+											w3-card,w3-white,div {
+												style: "min-height: 220px; padding: 12px;";
+												w3-panel,w3-card,w3-form,w3-grey,div {
+													w3-panel {
+														span {
+															text: "First Name";
+															w3-hover-blue,w3-input,input {
+																type: "text"
+																name: "firstName"
+															}
+														}
+														span {
+															text: "Nickname ";
+															w3-hover-blue,w3-input,input {
+																type: "text";
+																name: "Nickname";
+															}
+														}
+														span {
+															text: "Submit Results ";
+															w3-hover-blue,w3-input,w3-button,w3-green,input {
+																type: "submit";
+															
+															}
+														}
+													}
+												}
+											}	
+										}
+										
+									}
+								
+								}
+										
+							}
+				}
+			}
+					
+			    
+	</q-html>
+	<script>
+	document.addEventListener("QHTMLContentLoaded", function() { 
+	document.querySelector("#welcomeExample01qhtmlCodeBox").value = `
+<q-html>
+	button {
+	    text: "Click Here!"
+	    onclick: "alert('Hello world!')"
+	}
+</q-html>`
+
+document.querySelector("#welcomeExample02qhtmlCodeBox").value = `
+<q-html>
+	div {
+		style: "width: 120px; background-color: blue"
+		text: "Here's a Container div"
+		br { }
+		a {
+			href: "#"
+			onclick: "alert('hello world!')"
+			text: "Click here"
+		}
+		br { }
+		a,button {
+			href: "#"
+			onclick: "alert('hello world!')"
+			text: "or here!"
+		}
+	}
+</q-html>
+`
+
+document.querySelector("#welcomeExample03qhtmlCodeBox").value = `
+	
+		w3-panel,w3-card,w3-form,w3-grey,div {
+			form {
+			action: "GET"
+			
+				w3-panel,w3-grey {
+					span {
+						text: "First Name";
+						w3-hover-blue,w3-input,input {
+							type: "text"
+							name: "firstName"
+						}
+					}
+					span {
+						text: "Nickname ";
+						w3-hover-blue,w3-input,input {
+							type: "text";
+							name: "Nickname";
+						}
+					}
+					span {
+						text: "Submit Results ";
+						w3-hover-blue,w3-input,w3-button,input {
+							type: "submit";
+						
+						}
+					}
+				}
+			} 
+		}`
+		localStorage.setItem("qhtmldashboard_currentpage", "contentPanel_Welcome");
+	})
+	
+			function setContentPanel(panelName) {
+							    var current = localStorage.getItem("qmldashboard_currentpage");
+								if (current !== null) {
+									document.querySelector(`#${current}`).classList.add("w3-hide");
+								} else {
+									var current = "contentpanel_Welcome";
+								}
+								localStorage.setItem("qhtmldashboard_currentpage", "contentPanel_" + panelName);
+								document.querySelector(`#contentPanel_${panelName}`).classList.remove("w3-hide");
+							}
+	</script>
+	</body>
+	</html>

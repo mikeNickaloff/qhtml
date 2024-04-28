@@ -269,4 +269,45 @@ customElements.define('w3-bottombar', createW3CustomElementClass());
 customElements.define('w3-leftbar', createW3CustomElementClass());
 customElements.define('w3-rightbar', createW3CustomElementClass());
 customElements.define('w3-topbar', createW3CustomElementClass());
+customElements.define('w3-hide-medium', createW3CustomElementClass());
+customElements.define('w3-hide-small', createW3CustomElementClass());
+customElements.define('w3-hide-large', createW3CustomElementClass());
+customElements.define('w3-mobile', createW3CustomElementClass());
+
 // w3-hover-border-color is already defined in the hover effect classes
+(async function() { 
+async function loadStylesheet(url) {
+  try {
+    // Fetch the CSS file
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Read the response as a Blob
+    const blob = await response.blob();
+
+    // Create a URL for the Blob
+    const blobUrl = URL.createObjectURL(blob);
+
+    // Create a new link element for the stylesheet
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = blobUrl;
+
+    // Append the link to the end of the document
+    document.body.appendChild(link);
+
+    // Optional: Cleanup the blob URL once it is no longer needed
+    link.onload = () => {
+      URL.revokeObjectURL(blobUrl);
+    };
+  } catch (error) {
+    console.error('Failed to load stylesheet:', error);
+  }
+}
+
+// Example usage
+loadStylesheet('w3.css');
+
+})()
