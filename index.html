@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en-us"><!-- Mirrored from www.datafault.net/ux/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Aug 2022 00:14:38 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="w3.css">
+  <link rel="stylesheet" href="bs.css">
+<script src="qhtml.js"></script>
+<script src="w3-tags.js"></script>
+<script src="bs-tags.js"></script>
+    <title>User Experience</title>
+    <style>
+      html, body { padding: 0; margin : 0; overflow:visible; height: 100%; background-color: transparent;}
+      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
+      canvas { border: 0px none; background-color: transparent; height:300vh; width:100vw; z-index: 100; overflow: visible; position: absolute; }
+      /* The contenteditable property is set to true for the canvas in order to support
+         clipboard events. Hide the resulting focus frame and set the cursor back to
+         the default cursor. */
+      canvas { outline: 0px solid transparent; caret-color: transparent; cursor:default }
+    </style>
+    <script src="tech-tags.js" type="text/javascript"></script> <!-- optional tech-tags addon -->
+<script type="module">
+	/* register the tech-panel paint worklet for tech-tags.js */
+	CSS.paintWorklet.addModule("tech-panel-worklet.js");
+</script>
+
+  </head>
+  <body onload="init();">
+    <figure style="overflow: visible; display: none;" id="qtspinner">
+     <div id="progressSpinner" style="display: block;"><center style="margin-top:1.5em; line-height:150%">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#000;display:block;" width="231px" height="231px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<circle cx="85" cy="50" fill="#4b8ed8" r="5.6276">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.6960784313725488s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.6960784313725488s"></animate>
+</circle><circle cx="80.31088913245536" cy="67.5" fill="#4b8ed8" r="6.69426">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.450980392156863s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.450980392156863s"></animate>
+</circle><circle cx="67.5" cy="80.31088913245534" fill="#4b8ed8" r="7.76093">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.2058823529411766s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.2058823529411766s"></animate>
+</circle><circle cx="50" cy="85" fill="#4b8ed8" r="7.1724">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.9607843137254901s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.9607843137254901s"></animate>
+</circle><circle cx="32.50000000000001" cy="80.31088913245536" fill="#4b8ed8" r="6.10574">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.7156862745098038s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.7156862745098038s"></animate>
+</circle><circle cx="19.689110867544645" cy="67.5" fill="#4b8ed8" r="5.03907">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.4705882352941175s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.4705882352941175s"></animate>
+</circle><circle cx="15" cy="50.00000000000001" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.2254901960784315s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.2254901960784315s"></animate>
+</circle><circle cx="19.689110867544642" cy="32.500000000000014" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.9803921568627451s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.9803921568627451s"></animate>
+</circle><circle cx="32.499999999999986" cy="19.689110867544652" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.7352941176470588s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.7352941176470588s"></animate>
+</circle><circle cx="49.99999999999999" cy="15" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.49019607843137253s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.49019607843137253s"></animate>
+</circle><circle cx="67.5" cy="19.68911086754465" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.24509803921568626s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.24509803921568626s"></animate>
+</circle><circle cx="80.31088913245534" cy="32.499999999999986" fill="#4b8ed8" r="4.8">
+  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="0s"></animate>
+  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="0s"></animate>
+</circle>
+</svg></center></div>
+
+
+        <!-- <strong>preparing UX presentation.. please wait...</strong> -->
+        
+  
+
+        <div id="qtstatus">Compiling...</div>
+        <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
+      
+    </figure>
+
+    <script type="text/javascript">
+    
+    	function hideLoadingScreen() {
+    		document.querySelector("#loadingScreen").style.display = "none";
+    //		document.querySelector("#progressSpinner").style.display = "block";
+		}
+     
+	
+	        function init() {
+			
+          var spinner = document.querySelector('#qtspinner');
+          var canvas = document.querySelector('#qtcanvas');
+          var status = document.querySelector('#qtstatus')
+
+          var qtLoader = QtLoader({
+              canvasElements : [canvas],
+              showLoader: function(loaderStatus) {
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+                  status.innerHTML = loaderStatus + "...";
+              },
+              showError: function(errorText) {
+                  status.innerHTML = errorText;
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+              },
+              showExit: function() {
+                  status.innerHTML = "Application exit";
+                  if (qtLoader.exitCode !== undefined)
+                      status.innerHTML += " with code " + qtLoader.exitCode;
+                  if (qtLoader.exitText !== undefined)
+                      status.innerHTML += " (" + qtLoader.exitText + ")";
+                  spinner.style.display = 'block';
+                  canvas.style.display = 'none';
+              },
+              showCanvas: function() {
+                  spinner.style.display = 'none';
+                  canvas.style.display = 'block';
+              },
+          });
+		  hideLoadingScreen();
+			return;
+          qtLoader.loadEmscriptenModule("ux-demo");
+          
+      }
+    </script>
+	<script type="text/javascript" src="qtloader.js"></script>    
+  
+
+
+
+<!-- <iframe id="gen7b393466" src="https://dev.datafault.net/" width="100vw" height="70vh" style="width: 100vw; height: 75vh; left: 0%; top: 30vh; position: absolute; border: 0px none; zIndex: 400"></iframe></body></html>-->
+<div style="height: 100vh; overflow: visible; position: absolute; width: 100vw; zIndex: 300;">    <canvas id="qtcanvas" oncontextmenu="event.preventDefault()" contenteditable="true" style="display: block; border: 0px none; background-color: transparent; z-index: -200; outline: transparent solid 0px; caret-color: transparent; cursor: default;" width="1500" height="200"></canvas></div>
+
+
+<div style="position: absolute; top: 30vh; height: 200vh; background-color: white; z-index: 1000; width: 90vw;" id="qhtmlPreview";>
+<q-html>
+w3-main,w3-white,w3-text-black,w3-card,div {
+	style: "height:350vh"
+	w3-panel,w3-card,div {
+tech-panel { 
+                     
+                     tech-border-color: "white"
+                     tech-shadow-color: "green"
+                    tech-width: "0px"
+                    tech-top-left: "20px 20px"
+                    style: "width: 100%; height: 100%; overflow: visible;"
+                    w3-title,w3-xxlarge,w3-panel {
+
+                            w3-black,w3-text-green,div {
+
+		        	text: "Demo page"
+	         	}
+                 }
+}
+		w3-bar,w3-light-grey,w3-text,w3-card, div {
+			w3-bar-item, w3-left,w3-text-white {
+				div {
+                                  span {
+					text: "Item1"
+				}
+                                  }
+				div {
+                                     span {
+					text: "item 2"
+				}
+}
+				
+			}
+		}
+		
+	}
+	w3-twothird,w3-panel, w3-panel,w3-white,w3-text-light-grey,blockquote {
+		w3-panel, w3-large, w3-green, w3-title {
+			w3-header,w3-xlarge,w3-green,div {
+				text: "Hello world"
+			}
+		}
+		style: "height: 200vh"
+		w3-justify,article {
+			style: "height: 100%"
+            p { 
+                text: "Heres a great article about saying hello to the
+				world. only the way everybody else does it -- by
+				saying hello world... only in latin... "
+			}
+			w3-center,w3-container,div {
+				style: "width: 56vw"
+				w3-column,w3-card,w3-light-grey,w3-margin-left,div {
+					w3-display-top,w3-panel,
+					w3-black,div {
+
+						text: "Here's some columns"
+                                               
+						span {
+html {
+                                                    ` <br><blockquote>hello world</blockquote><br>`
+                                                }
+}
+						w3-row,div {
+							w3-display-container,w3-center,w3-dark-gray,div {
+								style: "width: 48.tvw; height: 51.5vh"
+								w3-half,w3-display-topleft,w3-padding-left,w3-panel,w3-center,div {
+									text: "some text goes here asdfasdf"
+									style: "width: 18vw; height: 60vh"
+								}
+								w3-half,w3-display-topright,w3-panel,div {
+									style: "width: 18vw; height: 60vh"
+									text: "some text goes here asdfasdf"
+								}
+								
+							}
+						}
+						
+					}
+				}
+			}
+		}
+	}
+			w3-white,w3-quarter, w3-nav, w3-col, w3-right, w3-padding,div {
+                w3-ul,w3-block,ul {
+			w3-bar {
+				w3-black {
+					w3-bar-item,w3-panel {
+						w3-green,li { text: "navigation" }
+					}
+				}
+			w3-white,w3-center {
+					w3-bar-item {
+						li { text: "item 1" }
+						li { text: "item 2" }
+						li { text: "item 3" }  
+					}
+				}
+			}
+		}
+	}
+}
+</q-html>
+<style>
+@property --shadow-color {
+	syntax: '<color>';
+	inherits: false;
+	initial-value: transparent;
+
+}
+@property --top-dent {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 2px;
+}
+@property --bottom-right {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 2px;
+}
+@property --top-left {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 2px;
+}
+  	body > div:nth-child(5) > q-html > div > div.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li:not(.w3-green) {
+	   transition: --top-dent 1.5s, --shadow-color 1s;
+	   --shadow-color: grey;
+	   --top-dent: 0px;
+	  
+  --tech-interpolated-percentage: 0.5;
+  
+  --tech-width: 1px;
+  --tech-shadow-color: var(--shadow-color);
+  --tech-border-color: var(--shadow-color);
+  --tech-pattern-shift: 0px 50px;
+  --tech-top-dent: var(--top-dent);
+  --tech-top-dent-length: 20%;  
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+   body > div:nth-child(5) > q-html > div > div.w3-white.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li:nth-child(1) {
+  --tech-bottom-left: 0px 0px;
+  --tech-top-left: 20px 20px;
+  --tech-top-right: 20px 20px;
+  --tech-bottom-right: 0px;
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+  
+ #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(2) {
+  --tech-bottom-left: 0px 0px;
+  --tech-top-left: 0px 0px;
+   --tech-bottom-right: 0px;
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+  #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(3) {
+  --tech-bottom-left: 0px 0px;
+  --tech-top-left: 0px 0px;
+   --tech-bottom-right: 0px;
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+  #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(4) {
+  --tech-bottom-left: 20px 20px;
+  --tech-top-left: 0px 0px;
+    --tech-bottom-right: 20px;
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+  body > div:nth-child(5) > q-html > div > blockquote  {
+     --shadow-color: green;
+	   --top-dent: 0px;
+	  --tech-top-left: 20px 20px;
+  --tech-top-right: 20px 20px;
+  --tech-bottom-right: 20px;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 20px 20px;
+  --tech-width: 1px;
+  --tech-shadow-color: var(--shadow-color);
+  --tech-border-color: var(--shadow-color);
+  --tech-pattern-shift: 20px 50px;
+  --tech-top-dent: var(--top-dent);
+  --tech-top-dent-length: 20%;  
+  background-color: white;
+  background-image: paint(tech-panel);
+  }
+  
+   body > div:nth-child(5) > q-html > div > div.w3-white.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li::hover {
+	 
+	    --shadow-color: green;
+		--top-dent: 30px
+	
+  --tech-interpolated-percentage: 0.5;
+  --tech-width: 3px;
+ --tech-shadow-color: var(--shadow-color);
+  --tech-border-color: var(--shadow-color);
+  --tech-pattern-shift: 0px 50px;
+  --tech-top-dent: var(--top-dent);
+  --tech-top-dent-length: 40%;  
+  background-color: black;
+  background-image: paint(tech-panel);
+  }
+  
+  
+  
+ 
+  
+  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(2) {
+    --shadow-color: black
+    --tech-top-left: 0px 0px;
+  --tech-top-right: 20px 20px;
+  --tech-bottom-right: 20px;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 0px 0px;
+  --tech-width: 1px;
+   --tech-shadow-color: black;
+  --tech-border-color: transparent;
+  --tech-pattern-shift: 0px 50px;
+  --tech-top-dent: 0px;
+  --tech-top-dent-length: 0%;  
+  background: paint(tech-panel);
+  }
+   body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(1) {
+    --tech-top-left: 0px 0px;
+  --tech-top-right: 0px 0px;
+  --tech-bottom-right: 0px;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 0px 0px;
+  --tech-width: 1px;
+   --tech-shadow-color: black;
+  --tech-border-color: transparent;
+  --tech-pattern-shift: 0px 50px;
+  --tech-top-dent: 0px;
+  --tech-top-dent-length: 0%;                                                           
+  background: paint(tech-panel);
+  }
+  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(1):hover {
+     --shadow-color: green;
+	 
+	     --tech-top-left: 0px 0px;
+  --tech-top-right: 0px 0px;
+  --tech-bottom-right: 0px;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 0px 0px;
+  --tech-width: 1px;
+   --tech-shadow-color: var(--shadow-color);
+  background-image: paint(tech-panel);
+  }
+  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(2):hover {
+     --shadow-color: green;
+	    --tech-top-left: 0px 0px;
+  --tech-top-right: 20px 20px;
+  --tech-bottom-right: 20px;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 0px 0px;
+  --tech-width: 1px;
+  background-image: paint(tech-panel);
+  }
+ body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div {
+    --tech-top-left: -20px -20px;
+  --tech-top-right: 20px 20px;
+  --tech-bottom-right: 15vh;
+  --tech-interpolated-percentage: 0.5;
+  --tech-bottom-left: 0px 0px;
+  --tech-width: 1px;
+  --tech-shadow-color: black;
+  --tech-border-color: black;
+  --tech-pattern-shift: -30px -50px;
+  --tech-top-dent: 15px;
+  --tech-top-dent-length: 20%;  
+  background: paint(tech-panel);
+  }
+  div.w3-panel {
+     transition: --top-dent 3.5s, --shadow-color 3s,   --top-left 2s, --bottom-right 3s;
+	 --shadow-color: black;
+	 --top-left: 0px 0px;
+	 --top-dent: 0px;
+	 --bottom-right: 0px;
+	 background: paint(tech-panel);
+  }
+  div.w3-panel:hover {
+     --tech-width: 2px;
+	 --shadow-color: green;
+	 --tech-top-left: var(--top-left) var(--top-left);
+	 --tech-bottom-right: var(--bottom-right);
+	 --tech-border-color: var(--shadow-color);
+	 --top-dent-length: 50%;
+	 --top-dent: 25px;
+	 --tech-top-dent: var(--top-dent);
+	 --top-left: 25px 25px;
+	 
+	 background-image: paint(tech-panel);
+  }
+   @keyframes borderTransition {
+            0% {
+              
+                --tech-shadow-color: #000;
+            }
+            100% {
+              
+                --tech-shadow-color: green;
+              
+            }
+        }
+	</style>
+</div>
+
+</body></html>
+
+
+
+

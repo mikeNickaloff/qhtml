@@ -12,27 +12,52 @@ class QHtmlElement extends HTMLElement {
     }
 
     render() {
-        const qhtmlContent = this.preprocess(this.textContent.trim());
+        const qhtmlContent = this.preprocess(this.innerHTML.trim().replace(/^"|"$/g, ''));
 
         const htmlContent = this.parseQHtml(qhtmlContent);
-		
-			const regex = /"{1}([^\"]*)"{1}/mg;
+
+        const regex = /"{1}([^\"]*)"{1}/mg;
         this.innerHTML = htmlContent.replace(regex, (match, p1) => `"${decodeURIComponent(p1)}"`); // Modify this line
+
+        // Temporarily replace HTML content sections with placeholders
+
     }
 
-    preprocess(i_qhtml) {
-        function addSemicolonToProperties(input) {
-            const regex = /(\w+)\s*:\s*("[^"]*")(?!;)/g;
-            return input.replace(regex, "$1: $2;");
-        }
-        let preprocessedInput = addSemicolonToProperties(i_qhtml);
-        let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput);
-
-        return preprocessedInput2;
+ preprocess(i_qhtml) {
+    function addSemicolonToProperties(input) {
+        const regex = /(\w+)\s*:\s*("[^"]*")(?!;)/g;
+        return input.replace(regex, "$1: $2;");
     }
 
+    function evaluateTemplateStrings(input) {
+        const templateRegex = /\$\{([^}]+)\}/g;
+        return input.replace(templateRegex, (match, expr) => {
+            try {
+                // Using `eval` to evaluate the expression inside ${}.
+                // Be sure that this is safe in your context before using!
+                return eval(expr);
+            } catch (error) {
+                console.error('Error evaluating expression:', expr);
+                return "";
+            }
+        });
+    }
 
-	// unused for now
+    function replaceBackticksWithQuotes(input) {
+        // This replaces all backtick-enclosed strings with double-quoted strings.
+        // It assumes all `${}` expressions are already evaluated or replaced.
+        return input.replace(/`([^`]*)`/g, (match, p1) => `"${p1}"`);
+    }
+
+    let preprocessedInput = addSemicolonToProperties(i_qhtml);
+   // preprocessedInput = evaluateTemplateStrings(preprocessedInput);
+    //preprocessedInput = replaceBackticksWithQuotes(preprocessedInput);
+    let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput);
+
+    return preprocessedInput2;
+}
+
+    // unused for now
     transformComponentDefinitions(input) {
         const componentDefRegex = /component\s+(\w+)\s*\{/g;
         return input.replace(componentDefRegex, (match, componentName, properties) => {
@@ -40,8 +65,8 @@ class QHtmlElement extends HTMLElement {
             return `q-component { id: "${componentName}"`;
         });
     }
-	
-	//parse all text and convert this element's contents into HTML
+
+    //parse all text and convert this element's contents into HTML
     parseQHtml(qhtml) {
 
         // Function to find the matching closing brace for each opening brace and add closing braces accordingly
@@ -64,13 +89,35 @@ class QHtmlElement extends HTMLElement {
 
             return result + '} '.repeat(depth); // Add any remaining closing braces at the end
         }
-		
-	function preprocess(i_qhtml) {
-		const regex = /"{1}([^\"]*)"{1}/mg;
-		var new_qhtml = i_qhtml.replace(regex, (match, p1) => `"${encodeURIComponent(p1)}"`);
-		return new_qhtml;
-			
-	}
+
+        function preprocess(i_qhtml) {
+            const regex = /"{1}([^\"]*)"{1}/mg;
+
+            // Alternative syntax using RegExp constructor
+            // const regex = new RegExp('[^\\:]+:[^\\"]+"{1}(1:[^\\"]*)"{1}', 'mg')
+
+
+            let m;
+            var new_qhtml = i_qhtml.replace(regex, (match, p1) => `"${encodeURIComponent(p1)}"`);
+            while ((m = regex.exec(i_qhtml)) !== null) {
+                // This is necessary to avoid infinite loops with zero-width matches
+                if (m.index === regex.lastIndex) {
+                    regex.lastIndex++;
+                }
+
+                // The result can be accessed through the `m`-variable.
+                //console.log(m);
+                m.forEach((match, groupIndex) => {
+
+                    //		console.log(`Found	 match, group ${groupIndex}: ${match}`);
+
+
+                });
+
+            }
+
+            return new_qhtml;
+        }
         const preprocessedInput = preprocess(qhtml);
         const adjustedInput = addClosingBraces(preprocessedInput);
 
@@ -79,18 +126,100 @@ class QHtmlElement extends HTMLElement {
             let nestedLevel = 0;
             let segmentStart = 0;
             let currentProperty = null;
+            var isHTML = false;
+			var isCSS = false;
+			var cssNestingLevel = 0;
+            var htmlString = "";
+			var intick = false;
 
             for (let i = 0; i < input.length; i++) {
+                if (isHTML) {
+				if (input[i] === "}") {
+                        isHTML = false;
+                        currentProperty.content = encodeURIComponent(htmlString);
+                        segments.push(currentProperty);
+                        currentProperty = null;
+
+                        // Reset input to process remaining elements/properties
+                        input = input.substring(i + 1);
+                        i = -1; // Reset loop index
+                        continue;
+                    } else {
+					   if (input[i] === "`") {
+					    if (intick) { intick = false; } else { intick = true; }
+					   
+					   } else {
+					       if (intick) {
+								htmlString = htmlString.concat(input[i]);
+								continue;
+						   } else {
+						     continue;
+						   }
+					   }
+                    }
+                } 
+				if (isCSS) {
+					if (input[i] === "}") {
+						cssNestingLevel--;
+						if (cssNestingLevel == 0) {
+							isCSS = false;
+							currentProperty.content = encodeURIComponent(htmlString);
+							segments.push(currentProperty);
+							currentProperty = null;
+
+                        // Reset input to process remaining elements/properties
+							input = input.substring(i + 1);
+							i = -1; // Reset loop index
+							continue;
+						} else  {
+							input = input.substring(i + 1);
+							i = -1; // Reset loop index
+							htmlString = htmlString.concat(input[i]);
+						}
+                    } else {
+					   if (input[i] === "{") {
+						cssNestingLevel++;
+						continue;
+					   
+					   } else {
+					     	htmlString = htmlString.concat(input[i]);
+								continue;	
+					   }
+                    }
+				} else {
                 if (input[i] === "{") {
                     nestedLevel++;
                     if (nestedLevel === 1) {
                         segmentStart = i + 1; // Start after the opening brace
                         const tag = input.substring(0, i).trim();
-                        currentProperty = {
-                            type: 'element',
-                            tag,
-                            content: ''
-                        };
+                        if (tag === "html") {
+
+                            currentProperty = {
+                                type: 'html',
+                                tag,
+                                content: ''
+                            };
+                            isHTML = true;
+                            htmlString = "";
+                            continue;
+                        } else if (tag === "css") {
+						 currentProperty = {
+                                type: 'css',
+                                tag,
+                                content: ''
+                            };
+							isCSS - true;
+							cssNestingLevel = 1;
+							htmlString = "";
+							continue;
+						
+					} else {
+                            currentProperty = {
+                                type: 'element',
+                                tag,
+                                content: ''
+                            };
+                        }
                     }
                 } else if (input[i] === "}") {
                     nestedLevel--;
@@ -122,23 +251,22 @@ class QHtmlElement extends HTMLElement {
                         i = -1;
                     }
                 }
+				}
             }
-			
+            console.log(JSON.stringify(segments))
             return segments;
         }
-		
-
-
 
         function processSegment(segment, parentElement) {
             if (segment.type === 'property') {
                 if (segment.name === 'content' || segment.name === 'contents' || segment.name === 'text' || segment.name === 'textcontent' || segment.name === 'textcontents' || segment.name === 'innertext') {
                     parentElement.innerHTML = decodeURIComponent(segment.value);
                 } else {
-                    if (segment.name === 'style' || segment.name === 'script') {
+                    if (segment.name === 'style' || segment.name === 'script' || segment.name === 'q-painter' || segment.name === 'css') {
                         parentElement.setAttribute(segment.name, segment.value);
 
                     } else {
+					
                         parentElement.setAttribute(segment.name, segment.value);
                     }
                 }
@@ -149,7 +277,12 @@ class QHtmlElement extends HTMLElement {
                     // Recursively create nested elements for each tag
                     let currentParent = parentElement;
                     tags.forEach(tag => {
-                        const newElement = document.createElement(tag);
+						function getTagNameFromHTML(htmlSnippet) {
+    var regex = /<(\w+)[\s>]/;
+    var match = htmlSnippet.match(regex);
+    return match ? match[1].toLowerCase() : '';
+}
+                        const newElement = document.createElement(getTagNameFromHTML(tag) === '' ? tag : getTagNameFromHTML(tag));
                         currentParent.appendChild(newElement);
                         currentParent = newElement; // Update the current parent to the newly created element
 
@@ -157,10 +290,14 @@ class QHtmlElement extends HTMLElement {
                     const childSegments = extractPropertiesAndChildren(segment.content);
                     childSegments.forEach(childSegment => processSegment(childSegment, currentParent));
                 } else {
+function getTagNameFromHTML(htmlSnippet) {
+    var regex = /<(\w+)[\s>]/;
+    var match = htmlSnippet.match(regex);
+    return match ? match[1].toLowerCase() : '';
+}
+                    const newElement = document.createElement(getTagNameFromHTML(segment.tag) === '' ? segment.tag : getTagNameFromHTML(segment.tag));
 
-                    const newElement = document.createElement(segment.tag);
-
-                    if (segment.tag === 'script') {
+                    if (segment.tag === 'script' || segment.tag === 'q-painter') {
 
                         storeAndExecuteScriptLater(segment.content)
                         newElement.text = segment.content;
@@ -176,41 +313,50 @@ class QHtmlElement extends HTMLElement {
                         }
                     }
                 }
+            } else {
+                if (segment.type === 'html') {
+                    const newElement = document.createElement("div");
+                    newElement.innerHTML += segment.content;
+                    parentElement.appendChild(newElement);
+                }
+				if (segment.type === 'css') {
+                    //const newElement = document.createElement("div");
+                    //newElement.innerHTML += segment.content;
+                    parentElement.setAttribute("style", segment.content);
+                }
             }
         }
-	
+
         const root = document.createElement('div');
         const segments = extractPropertiesAndChildren(adjustedInput); // Use the adjusted input
         segments.forEach(segment => processSegment(segment, root));
 
-        return root.innerHTML;
+        return root.outerHTML;
     }
-    
 
+    //unusd for now
+    convertComponents(inputText) {
+        const regex = /q-component\s*{\s*id:\s*"([^"]+)"\s*([^}]*)}/g;
+        let match;
 
-//unusd for now
- convertComponents(inputText) {
-    const regex = /q-component\s*{\s*id:\s*"([^"]+)"\s*([^}]*)}/g;
-    let match;
-    
-    while((match = regex.exec(inputText)) !== null) {
-        const id = match[1];
-        const content = match[2].trim();
+        while ((match = regex.exec(inputText)) !== null) {
+            const id = match[1];
+            const content = match[2].trim();
 
-        class CustomComponent extends HTMLElement {
-            connectedCallback() {
-                this.innerHTML = content;
+            class CustomComponent extends HTMLElement {
+                connectedCallback() {
+                    this.innerHTML = content;
+                }
+            }
+
+            customElements.define(id, CustomComponent);
+
+            const elements = document.getElementsByTagName(id);
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].innerHTML = content;
             }
         }
-        
-        customElements.define(id, CustomComponent);
-
-        const elements = document.getElementsByTagName(id);
-        for(let i = 0; i < elements.length; i++) {
-            elements[i].innerHTML = content;
-        }
     }
-}
 
     initMutationObserver() {
         // Create an observer instance linked to a callback function
@@ -240,9 +386,6 @@ class QHtmlElement extends HTMLElement {
 // Define the new element
 customElements.define('q-html', QHtmlElement);
 
-
-
-
 // for script blocks in qhtml code
 function storeAndExecuteScriptLater(scriptContent) {
     // Store the script content in a closure
@@ -261,17 +404,19 @@ function storeAndExecuteScriptLater(scriptContent) {
     setTimeout(deferredExecution, 0);
 }
 
-
 // unused for now
 const componentRegistry = {};
 
 class QComponent extends HTMLElement {
     constructor() {
         super();
-		this.defined = false
-		
-         this.observer = new MutationObserver(() => this.updateInstances());
-        this.observer.observe(this, { childList: true, subtree: true }); 
+        this.defined = false
+
+            this.observer = new MutationObserver(() => this.updateInstances());
+        this.observer.observe(this, {
+            childList: true,
+            subtree: true
+        });
     }
 
     connectedCallback() {
@@ -279,18 +424,16 @@ class QComponent extends HTMLElement {
         //  this.updateDefinition();
     }
     render() {
-		if (this.defined == false) { 
-		const id = this.getAttribute('id');
-		customElements.define(`${id}`, createQComponentClass());
-		 document.querySelectorAll(`${id}`).forEach(function (item) {
-            item.innerHTML = this.innerHTML
-        })
-		this.defined = true;
-		}
+        if (this.defined == false) {
+            const id = this.getAttribute('id');
+            customElements.define(`${id}`, createQComponentClass());
+            document.querySelectorAll(`${id}`).forEach(function (item) {
+                item.innerHTML = this.innerHTML
+            })
+            this.defined = true;
+        }
         this.updateDefinition();
         const id = this.getAttribute('id');
-
-       
 
     }
     disconnectedCallback() {
@@ -304,7 +447,7 @@ class QComponent extends HTMLElement {
 
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'id') {
-              this.updateDefinition(oldValue, newValue);
+            this.updateDefinition(oldValue, newValue);
             this.invalidateInstances(oldValue);
         }
     }
@@ -324,7 +467,6 @@ class QComponent extends HTMLElement {
             instances: []
         };
 
-        
     }
 
     updateInstances() {
@@ -353,7 +495,6 @@ class QComponent extends HTMLElement {
 }
 
 customElements.define('q-component', QComponent);
-
 
 //unused
 function createQComponentClass() {
@@ -394,7 +535,7 @@ function createQComponentClass() {
         }
     };
 }
-// renders all HTML in-place of any q-html  then dispatch event when qhtml conversion is complete 
+// renders all HTML in-place of any q-html  then dispatch event when qhtml conversion is complete
 window.addEventListener("DOMContentLoaded", function () {
 
     var elems = document.querySelectorAll("q-html")
@@ -406,5 +547,3 @@ window.addEventListener("DOMContentLoaded", function () {
         var qhtmlEvent = new CustomEvent('QHTMLContentLoaded', {});
     document.dispatchEvent(qhtmlEvent);
 })
-
-
