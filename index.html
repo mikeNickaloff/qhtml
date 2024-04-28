@@ -1,451 +1,635 @@
 <!DOCTYPE html>
-<html lang="en-us"><!-- Mirrored from www.datafault.net/ux/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Aug 2022 00:14:38 GMT --><!-- Added by HTTrack --><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"><!-- /Added by HTTrack -->
-
+<html>
+    <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="w3.css">
-  <link rel="stylesheet" href="bs.css">
-<script src="qhtml.js"></script>
-<script src="w3-tags.js"></script>
-<script src="bs-tags.js"></script>
-    <title>User Experience</title>
-    <style>
-      html, body { padding: 0; margin : 0; overflow:visible; height: 100%; background-color: transparent;}
-      /* the canvas *must not* have any border or padding, or mouse coords will be wrong */
-      canvas { border: 0px none; background-color: transparent; height:300vh; width:100vw; z-index: 100; overflow: visible; position: absolute; }
-      /* The contenteditable property is set to true for the canvas in order to support
-         clipboard events. Hide the resulting focus frame and set the cursor back to
-         the default cursor. */
-      canvas { outline: 0px solid transparent; caret-color: transparent; cursor:default }
-    </style>
-    <script src="tech-tags.js" type="text/javascript"></script> <!-- optional tech-tags addon -->
-<script type="module">
+    <meta name="q-html official site" content="width=device-width">
+    <title>q-html official site</title>
+	
+<script src="qhtml.js" type="text/javascript"></script> <!-- required for q-html parsing -->
+
+<script src="w3-tags.js" type="text/javascript"></script> <!-- optional w3-tags addon (w3.css tags w3-*) -->
+
+<script src="bs-tags.js" type="text/javascript"></script> <!-- optional bs-tags addon (bootstrap tags bs-*) -->
+
+<script src="tech-tags.js" type="text/javascript"></script> <!-- optional tech-tags addon (technology tags tech-*) -->
+
+
+
+    </head>
+	<body style="background-color:#607d8b!important">
+	
+	<!-- start q-html -->
+	<q-html>
+	w3-main,w3-container,w3-blue-grey,w3-cell-row,div {
+		id: "main-div";
+		style: "width: 100vw; height: auto; background-color: lightgrey; display: flex; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px;";
+		
+		
+		w3-cell,w3-mobile,w3-container,div {
+		     id: "main-layout-container";
+			style: "height: 100%; width: 100%; display: flex;";
+			
+			
+			w3-navbar,w3-cell,w3-top,w3-hide-small,div {
+					   style: "height: 23vh; width: 100%; max-height: 23vh; display: flex; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; right: 0px;";
+							
+						
+						w3-container,div {
+					
+							style: "width: 100%; height: 100%; position: relative; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; right: 0px; ";
+							tech-panel {
+								style: "width: 100%;"
+								tech-border-color: "white"
+								tech-shadow-color: "green"
+								tech-width: "1px"
+								tech-top-left: "20px 20px"
+								tech-bottom-left: "0px 0px";
+								tech-top-right: "20px 20px"
+								tech-bottom-right: "0px 0px";
+								w3-bar,w3-display-container,div {
+									style: "width: 100%; height: 100%";
+									
+									w3-display-topleft,w3-bar-item,div {
+								
+										style: "width: 25%; height: 50%";
+									
+										w3-label,w3-text-white,div {
+											text: "Search";
+								
+											w3-input,input {
+										
+											}		
+										}
+									}
+								
+									w3-display-topright,w3-bar-item,div {
+										id: "mainWindowLoginStatus";
+										w3-center,span {
+											text: "Logged in as";
+										}
+										br { }
+										w3-center,w3-bold,span {
+											text: "user@domain.com";
+										}
+									}
+									
+									w3-display-bottomright,w3-bar-item,div {
+								       style: "width: 15%;";
+										
+											w3-text-green,w3-title,w3-padding-top-32,w3-padding-right-32,h3 {
+												text: "&lt;/q-html&gt;";
+											}
+									
+										 
+									}
+								}
+							}
+							
+							
+						}
+						}
+					w3-panel,w3-row,w3-blue-grey,w3-quarter,w3-left,div {
+						  	 
+						 
+						
+						 style: "padding-left: 0px; margin-top: 15vh; height: 100%;";
+						 
+						 w3-sidebar,w3-column,w3-hide-small,w3-stretch,div {
+							tech-border-color: "black";
+							tech-shadow-color: "white";
+							tech-width: "0px";
+							tech-top-right: "20px 20px";
+							style: "height: 100%; width: 23%; margin-top: 5vh; padding-top: 2vh; overflow: visible; background-color: transparent;";
+							
+							w3-center,w3-padding,tech-panel {
+									style: "margin-top: 5vh; padding: 5vh;";
+									tech-shadow-color: "white";
+									tech-border-color: "black";
+									tech-top-dent: "3px";
+									tech-width: "0px";
+									tech-top-dent-length: "5%";
+									tech-top-right: "5px";
+									tech-top-left: "5px";
+									tech-bottom-right: "5px";
+									tech-bottom-left: "5px";
+									w3-padding-16,w3-cell-row,w3-justify {
+									
+									div {
+											style: "overflow: hidden; wrap: no-wrap;"
+											tech-top-right: "20px";
+											tech-top-left: "20px";
+											w3-center {
+												span {
+													style: "margin-left: 20%";
+													text: "🏠"
+												}
+												a { 
+													style: "margin-right: 10%; margin-left: 10%; overflow: hidden; wrap: no-wrap;";
+													text: "️Welcome"
+													onclick: "setContentPanel('Welcome')";
+													href: "javascript:void(0)"
+												}
+											}
+											
+									}
+										
+										div {
+											w3-center {
+												span {
+													style: "margin-left: 22%";
+													text: "ℹ️ "
+												}
+												span { 
+													style: "margin-right: 9%; margin-left: 12%; overflow: hidden; wrap: no-wrap;";
+													text: "️ Support"
+												}
+											}
+											
+										}
+										div {
+											w3-center {
+												span {
+													style: "margin-left: 20%";
+													text: "📥"
+												}
+												a { 
+													style: "margin-right: 10%; margin-left: 10%; overflow: hidden; wrap: no-wrap;";
+													text: "️Downloads"
+													onclick: "setContentPanel('Downloads')";
+													href: "javascript:void(0)"
+												}
+											}
+										}	
+									
+								
+										div {
+											w3-center {
+												img {
+													style: "margin-left: 20%; width: 6%; height: 6%;";
+													src: "wp.svg";
+												}
+												span { 
+													style: "margin-right: 10%; margin-left: 10%; overflow: hidden; wrap: no-wrap;";
+													text: "️Wordpress"
+												}
+											}
+										}
+										
+											div {
+												w3-center {
+													span {
+														style: "margin-left: 20%";
+														text: "📝"
+													}
+													span { 
+														style: "margin-right: 10%; margin-left: 10%; overflow: hidden; wrap: no-wrap;";
+														text: "️ Examples"
+													}
+												}
+											}
+											div {
+												w3-center {
+													img {
+														style: "margin-left: 20%; width: 6%; height: 6%; overflow: hidden; wrap: no-wrap;";
+														src: "w3.png";
+														
+														
+													}
+													span {
+														style: "margin-right: 10%; margin-left: 10%; overflow: hidden; wrap: no-wrap;";
+														text: "w3-tags.js";
+													}
+												}
+											}
+												
+											}	
+											
+										}
+									}
+							}
+					   
+				 infomation: "***Here is the container for the main area on the right including the heading****";
+				 
+				 
+				 
+			w3-cell,w3-container,w3-darkgrey,w3-mobile,div {
+			
+			  	 style: "margin-top: 10%; padding: 0px 0px 0px 0px; right: 0px; width: 70%; height: 100%;"
+				div { 
+					style: "height: 105%; width:100%; background-color: transparent; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; right: 0px;";
+				
+					
+						
+						
+						w3-panel,w3-card,div {
+								id: "contentPanelParent"
+								information: "This is the container which contains all of the pages of the site hidden and shown one at a time when requested";
+								tech-border-color: "white"
+								tech-shadow-color: "green"
+								tech-width: "1px"
+								tech-top-left: "00px 00px"
+								tech-bottom-left: "0px 0px";
+								tech-top-right: "0px 0px"
+								tech-bottom-right: "0px 0px";
+								tech-top-dent: "10px";
+								tech-top-dent-length: "10%";
+								 style: "margin-left: 0%; background: paint(tech-panel);  --tech-border-color: white; --tech-shadow-color: green; --tech-width: 1px; --tech-top-left: 00px 00px; height:auto; width: 100%; margin: 0px 0px 0px 0px; padding: 10px 10px 10px 10px; right: 0px;";
+							
+								div {
+								class: "contentPanel";
+									id: "contentPanel_Welcome"
+								h2  {
+										text: "Welcome";
+									}
+									article {
+									
+									
+										text: "Hello and welcome to the q-html home page. Here you can find many different resources relating to q-html, the quick and easy way to create HTML that saves time, effort, and improves readability for developers and search engines. ";
+										
+									}
+									br { }
+									article {
+										text: "If you are like me, you are probably asking yourself: "
+										i { 
+											text: " How does it work? "
+										}
+									}
+									article {
+										text: "The answer is actually very simple -- it just works. Unlike many modern scripting languages, q-html is intentionally simple. "
+										
+										
+									}
+									br { }
+									article {
+									  text: "Lets start off with an example q-html element to demonstrate. "
+									}
+									h3 { 
+											text: "Basic usage"
+									}
+									blockquote {
+										w3-label,span {
+											text: "Simple button with hello world alert message on click"
+										}
+										w3-input,textarea {
+											style: "min-height: 170px"
+											id: "welcomeExample01qhtmlCodeBox"
+											
+											
+										}
+										br { }
+										w3-label,span {
+											text: "Resulting q-html code"
+										}
+										w3-card,w3-white,div {
+											style: "min-height: 170px; padding: 12px";
+											button {
+												text: "Click Here!"
+												onclick: "alert('Hello world!')"
+											}	
+										}
+									}
+										br { }
+										br { }
+										h3 { 
+											text: "Nesting and Combining Tags"
+										}
+										article { 
+											text: "q-html conveniently allows for any inline attribute to be attached to any element in a declarative, simple way. Nesting is fully supported using brackets and by combining multiple tags together."
+										}
+										blockquote {
+										   w3-label,span {
+												text: "Nested elements and combined Elements"
+											}
+											w3-input,textarea {
+												style: "min-height: 240px"
+												id: "welcomeExample02qhtmlCodeBox"
+											}
+											br { }
+											w3-label,span {
+												text: "Resulting q-html code"
+											}	
+											w3-card,w3-white,div {
+												style: "min-height: 220px; padding: 12px;";
+												div {
+													style: "width: 120px; background-color: blue";
+													text: "Here's a Container div";
+													br { }
+													a {
+														href: "#"
+														onclick: "alert('hello world!')"
+														text: "Click here"
+													}
+													br { }
+													a,button {
+														href: "#"
+														onclick: "alert('hello world!')"
+														text: "or here!"
+													}
+												}
+											}	
+										}
+										
+										br { }
+										br { }
+										h3 { 
+											text: "w3-tags.js addon"
+										}
+										article { 
+											text: "q-html has an extremely powerful addon, made by the same author, called w3-tags.js. This addon turns q-html into an easy-to-use web building tool. To learn more about w3.css visit "
+											a {
+												href: "https://www.w3schools.com/w3css/default.asp";
+												text: "https://www.w3schools.com/w3css/";
+											}
+										}
+										blockquote {
+										   w3-label,span {
+												text: "Creating a form with w3.css classes using w3-tags.js";
+											}
+											w3-input,textarea {
+												style: "min-height: 240px"
+												id: "welcomeExample03qhtmlCodeBox"
+											}
+											br { }
+											w3-label,span {
+												text: "Resulting q-html code"
+											}	
+											w3-card,w3-white,div {
+												style: "min-height: 220px; padding: 12px;";
+												w3-panel,w3-card,w3-form,w3-grey,div {
+													w3-panel {
+														span {
+															text: "First Name";
+															w3-hover-blue,w3-input,input {
+																type: "text"
+																name: "firstName"
+															}
+														}
+														span {
+															text: "Nickname ";
+															w3-hover-blue,w3-input,input {
+																type: "text";
+																name: "Nickname";
+															}
+														}
+														span {
+															text: "Submit Results ";
+															w3-hover-blue,w3-input,w3-button,w3-green,input {
+																type: "submit";
+															
+															}
+														}
+													}
+												}
+											}	
+										}
+										
+									}
+									
+									div {
+										id: "contentPanel_Downloads";
+										class: "w3-hide contentPanel";
+										h2  {
+											text: "Downloads";
+										}
+										article {
+											text: "Offical Github Repo:"
+											br { }
+											a {
+												href: "https://github.com/mikeNickaloff/qhtml";
+												text: "https://github.com/mikeNickaloff/qhtml";
+											}
+										}
+									}
+								
+								}
+										
+							}
+				}
+			}
+					
+			    
+	</q-html>
+	<script>
+	function setContentPanel(panelName) {
+							    document.querySelectorAll(".contentPanel").forEach(function(elem) { elem.classList.add("w3-hide"); })
+								localStorage.setItem("qhtmldashboard_currentpage", "contentPanel_" + panelName);
+								document.querySelector(`#contentPanel_${panelName}`).classList.remove("w3-hide");
+							}
+	</script>
+	
+	<script type="module">
 	/* register the tech-panel paint worklet for tech-tags.js */
 	CSS.paintWorklet.addModule("tech-panel-worklet.js");
-</script>
-
-  </head>
-  <body onload="init();">
-    <figure style="overflow: visible; display: none;" id="qtspinner">
-     <div id="progressSpinner" style="display: block;"><center style="margin-top:1.5em; line-height:150%">
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#000;display:block;" width="231px" height="231px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-<circle cx="85" cy="50" fill="#4b8ed8" r="5.6276">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.6960784313725488s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.6960784313725488s"></animate>
-</circle><circle cx="80.31088913245536" cy="67.5" fill="#4b8ed8" r="6.69426">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.450980392156863s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.450980392156863s"></animate>
-</circle><circle cx="67.5" cy="80.31088913245534" fill="#4b8ed8" r="7.76093">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-2.2058823529411766s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-2.2058823529411766s"></animate>
-</circle><circle cx="50" cy="85" fill="#4b8ed8" r="7.1724">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.9607843137254901s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.9607843137254901s"></animate>
-</circle><circle cx="32.50000000000001" cy="80.31088913245536" fill="#4b8ed8" r="6.10574">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.7156862745098038s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.7156862745098038s"></animate>
-</circle><circle cx="19.689110867544645" cy="67.5" fill="#4b8ed8" r="5.03907">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.4705882352941175s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.4705882352941175s"></animate>
-</circle><circle cx="15" cy="50.00000000000001" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-1.2254901960784315s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-1.2254901960784315s"></animate>
-</circle><circle cx="19.689110867544642" cy="32.500000000000014" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.9803921568627451s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.9803921568627451s"></animate>
-</circle><circle cx="32.499999999999986" cy="19.689110867544652" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.7352941176470588s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.7352941176470588s"></animate>
-</circle><circle cx="49.99999999999999" cy="15" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.49019607843137253s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.49019607843137253s"></animate>
-</circle><circle cx="67.5" cy="19.68911086754465" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="-0.24509803921568626s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="-0.24509803921568626s"></animate>
-</circle><circle cx="80.31088913245534" cy="32.499999999999986" fill="#4b8ed8" r="4.8">
-  <animate attributeName="r" values="4.8;4.8;8;4.8;4.8" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" repeatCount="indefinite" begin="0s"></animate>
-  <animate attributeName="fill" values="#4b8ed8;#4b8ed8;#00e2ff;#4b8ed8;#4b8ed8" repeatCount="indefinite" times="0;0.1;0.2;0.3;1" dur="2.9411764705882355s" begin="0s"></animate>
-</circle>
-</svg></center></div>
-
-
-        <!-- <strong>preparing UX presentation.. please wait...</strong> -->
-        
-  
-
-        <div id="qtstatus">Compiling...</div>
-        <noscript>JavaScript is disabled. Please enable JavaScript to use this application.</noscript>
-      
-    </figure>
-
-    <script type="text/javascript">
-    
-    	function hideLoadingScreen() {
-    		document.querySelector("#loadingScreen").style.display = "none";
-    //		document.querySelector("#progressSpinner").style.display = "block";
-		}
-     
+	import QPainter from './q-painter.js'
+	import renderQPainter from './q-painter.js'
 	
-	        function init() {
-			
-          var spinner = document.querySelector('#qtspinner');
-          var canvas = document.querySelector('#qtcanvas');
-          var status = document.querySelector('#qtstatus')
+	
+	var myPainter = new QPainter('topleftdeco', '.top-left-deco', { width: 200, height: 300 }, {});
+	/* tell QPainter what to paint */
+	myPainter.paint = `
+		   ctx.beginPath();
+	ctx.fillStyle = 'rgb(0, 0, 17)';
+	ctx.strokeStyle = 'rgb(0, 0, 0)';
+	
+// #path1
+	ctx.beginPath();
+	ctx.lineWidth = 0.595766;
+	ctx.globalAlpha = 1.0;
+	ctx.moveTo(8.912803, 101.490440);
+	ctx.lineTo(9.966323, -11.603606);
+	ctx.lineTo(18.059106, -4.152549);
+	ctx.lineTo(26.812003, -3.170836);
+	ctx.lineTo(34.699103, 3.888929);
+	ctx.lineTo(49.850545, 4.514708);
+	ctx.lineTo(54.262607, 7.409776);
+	ctx.lineTo(56.799842, 10.094278);
+	ctx.lineTo(57.176964, 13.890945);
+	ctx.bezierCurveTo(49.960539, 13.836515, 47.300585, 19.646821, 41.727682, 23.085796);
+	ctx.bezierCurveTo(38.383721, 25.149328, 34.011572, 23.102866, 30.405506, 24.149784);
+	ctx.bezierCurveTo(28.566546, 24.683649, 26.857411, 26.589986, 25.902853, 28.117457);
+	ctx.bezierCurveTo(24.564409, 30.259187, 25.115225, 33.485086, 25.092855, 35.886363);
+	ctx.lineTo(24.928201, 53.557300);
+	ctx.bezierCurveTo(24.912621, 55.229826, 25.011191, 56.936028, 24.045951, 58.410107);
+	ctx.bezierCurveTo(22.208209, 61.216522, 18.331900, 63.200358, 17.544733, 66.572301);
+	ctx.bezierCurveTo(16.153666, 72.531118, 17.269050, 79.902407, 17.212163, 86.009051);
+	ctx.bezierCurveTo(17.191593, 88.216491, 17.614328, 90.975301, 16.796903, 93.074471);
+	ctx.bezierCurveTo(15.583517, 96.190326, 11.603466, 99.477746, 8.912803, 101.490440);
+	ctx.moveTo(59.635237, 68.342555);
+	ctx.lineTo(59.333720, 60.917621);
+	ctx.lineTo(60.816354, 60.929641);
+	ctx.lineTo(60.376562, 68.348297);
+	ctx.lineTo(59.635237, 68.341597);
+	ctx.moveTo(54.234744, 11.391891);
+	ctx.bezierCurveTo(53.050393, 9.911251, 51.687449, 8.199223, 49.822976, 7.469762);
+	ctx.bezierCurveTo(47.394221, 6.519526, 43.887445, 7.062899, 41.301168, 7.040995);
+	ctx.lineTo(22.768195, 6.884039);
+	ctx.bezierCurveTo(20.590582, 6.865589, 13.629005, 5.556660, 12.420515, 7.563484);
+	ctx.bezierCurveTo(11.684548, 8.785602, 11.983469, 10.742486, 11.969837, 12.094462);
+	ctx.lineTo(11.877517, 21.990012);
+	ctx.bezierCurveTo(11.791847, 31.186866, 11.756571, 40.372196, 11.899077, 49.559036);
+	ctx.bezierCurveTo(11.964527, 53.783092, 11.035515, 58.931540, 12.236919, 62.992881);
+	ctx.bezierCurveTo(16.215328, 62.746758, 21.580404, 58.092572, 22.235660, 54.241394);
+	ctx.bezierCurveTo(23.307481, 47.942013, 22.451896, 40.834707, 22.511366, 34.450715);
+	ctx.bezierCurveTo(22.533176, 32.109282, 22.126574, 29.296549, 22.813882, 27.030897);
+	ctx.bezierCurveTo(23.140401, 25.954582, 23.855731, 25.061932, 24.606239, 24.220590);
+	ctx.bezierCurveTo(25.594662, 23.112421, 26.752305, 21.761663, 28.257517, 21.304014);
+	ctx.bezierCurveTo(31.961509, 20.177859, 36.565946, 22.363237, 40.064423, 20.421641);
+	ctx.bezierCurveTo(45.374042, 17.474905, 47.435928, 11.354416, 54.234711, 11.391891);
+	ctx.moveTo(59.340271, 60.210778);
+	ctx.lineTo(59.399531, 53.849241);
+	ctx.lineTo(60.882163, 53.861261);
+	ctx.lineTo(60.822903, 60.222798);
+	ctx.closePath();
+	ctx.moveTo(59.776769, 53.145537);
+	ctx.bezierCurveTo(59.305644, 51.285222, 58.651550, 47.541564, 60.948009, 46.793417);
+	ctx.lineTo(60.518094, 53.151815);
+	ctx.closePath();
+	ctx.moveTo(59.471959, 46.073609);
+	ctx.lineTo(59.498299, 43.246249);
+	ctx.lineTo(60.980931, 43.258269);
+	ctx.lineTo(60.954591, 46.085629);
+	ctx.closePath();
+	ctx.moveTo(59.504877, 42.539419);
+	ctx.lineTo(59.531217, 39.712072);
+	ctx.lineTo(61.013850, 39.724092);
+	ctx.lineTo(60.987510, 42.551439);
+	ctx.closePath();
+	ctx.moveTo(59.537798, 39.005229);
+	ctx.lineTo(59.597058, 32.643692);
+	ctx.lineTo(61.079692, 32.655712);
+	ctx.lineTo(61.020432, 39.017249);
+	ctx.closePath();
+	ctx.moveTo(59.603649, 31.936848);
+	ctx.lineTo(59.662909, 25.575312);
+	ctx.lineTo(61.145542, 25.587332);
+	ctx.lineTo(61.086282, 31.948869);
+	ctx.closePath();
+	ctx.moveTo(59.669498, 24.868479);
+	ctx.bezierCurveTo(59.807732, 23.234822, 60.543119, 19.299590, 59.154897, 18.112929);
+	ctx.bezierCurveTo(57.683555, 16.855164, 54.153723, 17.399424, 52.325443, 17.383900);
+	ctx.bezierCurveTo(54.222102, 15.789221, 57.379729, 16.366364, 59.748512, 16.386425);
+	ctx.lineTo(60.175162, 10.381440);
+	ctx.bezierCurveTo(61.766987, 11.904605, 61.249830, 14.396070, 61.231174, 16.398983);
+	ctx.lineTo(84.582714, 16.596747);
+	ctx.lineTo(84.225227, 15.179937);
+	ctx.lineTo(90.526428, 15.233307);
+	ctx.lineTo(90.509968, 17.000392);
+	ctx.bezierCurveTo(97.536032, 15.561634, 105.942070, 16.777645, 113.123480, 16.838464);
+	ctx.bezierCurveTo(112.377530, 19.192173, 107.048570, 18.200798, 104.955810, 18.183075);
+	ctx.bezierCurveTo(101.507500, 18.153875, 98.020202, 18.265615, 94.577532, 18.075542);
+	ctx.bezierCurveTo(93.168879, 17.997762, 91.095815, 17.521490, 89.830113, 18.320049);
+	ctx.bezierCurveTo(88.593555, 19.100220, 88.193703, 21.088389, 87.495318, 22.276548);
+	ctx.lineTo(87.124649, 22.273448);
+	ctx.lineTo(84.445432, 18.258214);
+	ctx.lineTo(77.527023, 17.950791);
+	ctx.lineTo(61.221298, 17.459255);
+	ctx.bezierCurveTo(61.201558, 19.578820, 62.129436, 23.963256, 59.669527, 24.868495);
+	ctx.moveTo(12.213326, -14.058726);
+	ctx.bezierCurveTo(65.733384, -13.605464, 119.217240, -13.418359, 172.708810, -12.698152);
+	ctx.bezierCurveTo(183.431870, -12.553770, 194.197100, -12.517502, 204.956190, -12.426384);
+	ctx.bezierCurveTo(207.790090, -12.402374, 210.636290, -12.218924, 213.466650, -12.246639);
+	ctx.bezierCurveTo(214.584250, -12.257589, 216.267700, -12.572912, 217.264270, -11.955199);
+	ctx.bezierCurveTo(218.176680, -11.389603, 218.121470, -10.039594, 218.101040, -9.131969);
+	ctx.bezierCurveTo(218.055840, -7.120477, 217.782910, -5.146741, 217.906780, -3.127112);
+	ctx.bezierCurveTo(217.986080, -1.834996, 218.394150, -0.271976, 217.720790, 0.937422);
+	ctx.bezierCurveTo(217.081310, 2.085910, 215.657210, 2.116370, 214.456440, 2.136551);
+	ctx.bezierCurveTo(211.618360, 2.184251, 208.771560, 2.097761, 205.933190, 2.073711);
+	ctx.lineTo(169.608570, 1.766082);
+	ctx.lineTo(55.074832, 0.796093);
+	ctx.lineTo(41.731093, 0.683084);
+	ctx.bezierCurveTo(39.476149, 0.663984, 36.777524, 0.983501, 34.694547, 0.001420);
+	ctx.bezierCurveTo(31.400431, -1.551685, 30.012006, -5.529107, 26.602981, -6.864265);
+	ctx.bezierCurveTo(24.290726, -7.769885, 21.588136, -6.901387, 19.195241, -7.431196);
+	ctx.bezierCurveTo(16.257216, -8.082356, 13.553811, -11.642840, 12.213335, -14.058210);
+	ctx.moveTo(50.742147, -11.611228);
+	ctx.bezierCurveTo(50.720207, -9.255943, 50.676397, -6.899787, 50.680517, -4.544401);
+	ctx.bezierCurveTo(50.681426, -3.589212, 50.540300, -2.246236, 51.395140, -1.554647);
+	ctx.bezierCurveTo(52.324430, -0.802930, 53.964766, -0.984688, 55.093325, -0.971564);
+	ctx.bezierCurveTo(57.947216, -0.938044, 60.775583, -0.900454, 63.620614, -1.131225);
+	ctx.bezierCurveTo(73.073947, -1.897861, 82.665115, -0.008517, 92.160353, -0.778111);
+	ctx.bezierCurveTo(95.643782, -1.060440, 99.049912, -0.599402, 102.537680, -0.569196);
+	ctx.bezierCurveTo(109.970670, -0.505196, 117.372500, -0.515166, 124.777280, -0.383520);
+	ctx.bezierCurveTo(144.177960, -0.039756, 163.582580, -0.052206, 182.969260, 0.111980);
+	ctx.lineTo(206.690970, 0.312879);
+	ctx.bezierCurveTo(208.790150, 0.330659, 213.506790, 1.205650, 215.217600, -0.129228);
+	ctx.bezierCurveTo(216.089450, -0.809520, 215.969420, -2.185032, 215.988190, -3.143594);
+	ctx.bezierCurveTo(216.030390, -5.297753, 217.183890, -9.866637, 214.174420, -10.336993);
+	ctx.bezierCurveTo(208.536240, -11.218188, 202.038780, -10.565609, 196.289930, -10.614295);
+	ctx.bezierCurveTo(183.229490, -10.724900, 170.185540, -10.599735, 157.121380, -10.710365);
+	ctx.lineTo(114.124890, -11.074500);
+	ctx.closePath();
+	ctx.stroke();
+		`
 
-          var qtLoader = QtLoader({
-              canvasElements : [canvas],
-              showLoader: function(loaderStatus) {
-                  spinner.style.display = 'block';
-                  canvas.style.display = 'none';
-                  status.innerHTML = loaderStatus + "...";
-              },
-              showError: function(errorText) {
-                  status.innerHTML = errorText;
-                  spinner.style.display = 'block';
-                  canvas.style.display = 'none';
-              },
-              showExit: function() {
-                  status.innerHTML = "Application exit";
-                  if (qtLoader.exitCode !== undefined)
-                      status.innerHTML += " with code " + qtLoader.exitCode;
-                  if (qtLoader.exitText !== undefined)
-                      status.innerHTML += " (" + qtLoader.exitText + ")";
-                  spinner.style.display = 'block';
-                  canvas.style.display = 'none';
-              },
-              showCanvas: function() {
-                  spinner.style.display = 'none';
-                  canvas.style.display = 'block';
-              },
-          });
-		  hideLoadingScreen();
-			return;
-          qtLoader.loadEmscriptenModule("ux-demo");
-          
-      }
-    </script>
-	<script type="text/javascript" src="qtloader.js"></script>    
-  
-
-
-
-<!-- <iframe id="gen7b393466" src="https://dev.datafault.net/" width="100vw" height="70vh" style="width: 100vw; height: 75vh; left: 0%; top: 30vh; position: absolute; border: 0px none; zIndex: 400"></iframe></body></html>-->
-<div style="height: 100vh; overflow: visible; position: absolute; width: 100vw; zIndex: 300;">    <canvas id="qtcanvas" oncontextmenu="event.preventDefault()" contenteditable="true" style="display: block; border: 0px none; background-color: transparent; z-index: -200; outline: transparent solid 0px; caret-color: transparent; cursor: default;" width="1500" height="200"></canvas></div>
-
-
-<div style="position: absolute; top: 30vh; height: 200vh; background-color: white; z-index: 1000; width: 90vw;" id="qhtmlPreview";>
-<q-html>
-w3-main,w3-white,w3-text-black,w3-card,div {
-	style: "height:350vh"
-	w3-panel,w3-card,div {
-tech-panel { 
-                     
-                     tech-border-color: "white"
-                     tech-shadow-color: "green"
-                    tech-width: "0px"
-                    tech-top-left: "20px 20px"
-                    style: "width: 100%; height: 100%; overflow: visible;"
-                    w3-title,w3-xxlarge,w3-panel {
-
-                            w3-black,w3-text-green,div {
-
-		        	text: "Demo page"
-	         	}
-                 }
-}
-		w3-bar,w3-light-grey,w3-text,w3-card, div {
-			w3-bar-item, w3-left,w3-text-white {
-				div {
-                                  span {
-					text: "Item1"
-				}
-                                  }
-				div {
-                                     span {
-					text: "item 2"
-				}
-}
-				
-			}
-		}
+        /* generate worklet, add module, add stylesheet to head */
+		myPainter.renderQPainter();
 		
-	}
-	w3-twothird,w3-panel, w3-panel,w3-white,w3-text-light-grey,blockquote {
-		w3-panel, w3-large, w3-green, w3-title {
-			w3-header,w3-xlarge,w3-green,div {
-				text: "Hello world"
-			}
-		}
-		style: "height: 200vh"
-		w3-justify,article {
-			style: "height: 100%"
-            p { 
-                text: "Heres a great article about saying hello to the
-				world. only the way everybody else does it -- by
-				saying hello world... only in latin... "
-			}
-			w3-center,w3-container,div {
-				style: "width: 56vw"
-				w3-column,w3-card,w3-light-grey,w3-margin-left,div {
-					w3-display-top,w3-panel,
-					w3-black,div {
-
-						text: "Here's some columns"
-                                               
-						span {
-html {
-                                                    ` <br><blockquote>hello world</blockquote><br>`
-                                                }
-}
-						w3-row,div {
-							w3-display-container,w3-center,w3-dark-gray,div {
-								style: "width: 48.tvw; height: 51.5vh"
-								w3-half,w3-display-topleft,w3-padding-left,w3-panel,w3-center,div {
-									text: "some text goes here asdfasdf"
-									style: "width: 18vw; height: 60vh"
-								}
-								w3-half,w3-display-topright,w3-panel,div {
-									style: "width: 18vw; height: 60vh"
-									text: "some text goes here asdfasdf"
-								}
-								
-							}
-						}
-						
-					}
-				}
-			}
-		}
-	}
-			w3-white,w3-quarter, w3-nav, w3-col, w3-right, w3-padding,div {
-                w3-ul,w3-block,ul {
-			w3-bar {
-				w3-black {
-					w3-bar-item,w3-panel {
-						w3-green,li { text: "navigation" }
-					}
-				}
-			w3-white,w3-center {
-					w3-bar-item {
-						li { text: "item 1" }
-						li { text: "item 2" }
-						li { text: "item 3" }  
-					}
-				}
-			}
-		}
-	}
-}
-</q-html>
-<style>
-@property --shadow-color {
-	syntax: '<color>';
-	inherits: false;
-	initial-value: transparent;
-
-}
-@property --top-dent {
-	syntax: '<length>';
-	inherits: false;
-	initial-value: 2px;
-}
-@property --bottom-right {
-	syntax: '<length>';
-	inherits: false;
-	initial-value: 2px;
-}
-@property --top-left {
-	syntax: '<length>';
-	inherits: false;
-	initial-value: 2px;
-}
-  	body > div:nth-child(5) > q-html > div > div.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li:not(.w3-green) {
-	   transition: --top-dent 1.5s, --shadow-color 1s;
-	   --shadow-color: grey;
-	   --top-dent: 0px;
-	  
-  --tech-interpolated-percentage: 0.5;
-  
-  --tech-width: 1px;
-  --tech-shadow-color: var(--shadow-color);
-  --tech-border-color: var(--shadow-color);
-  --tech-pattern-shift: 0px 50px;
-  --tech-top-dent: var(--top-dent);
-  --tech-top-dent-length: 20%;  
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-   body > div:nth-child(5) > q-html > div > div.w3-white.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li:nth-child(1) {
-  --tech-bottom-left: 0px 0px;
-  --tech-top-left: 20px 20px;
-  --tech-top-right: 20px 20px;
-  --tech-bottom-right: 0px;
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-  
- #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(2) {
-  --tech-bottom-left: 0px 0px;
-  --tech-top-left: 0px 0px;
-   --tech-bottom-right: 0px;
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-  #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(3) {
-  --tech-bottom-left: 0px 0px;
-  --tech-top-left: 0px 0px;
-   --tech-bottom-right: 0px;
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-  #qhtmlPreview > q-html > div > w3-white > div > ul > li:nth-child(4) {
-  --tech-bottom-left: 20px 20px;
-  --tech-top-left: 0px 0px;
-    --tech-bottom-right: 20px;
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-  body > div:nth-child(5) > q-html > div > blockquote  {
-     --shadow-color: green;
-	   --top-dent: 0px;
-	  --tech-top-left: 20px 20px;
-  --tech-top-right: 20px 20px;
-  --tech-bottom-right: 20px;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 20px 20px;
-  --tech-width: 1px;
-  --tech-shadow-color: var(--shadow-color);
-  --tech-border-color: var(--shadow-color);
-  --tech-pattern-shift: 20px 50px;
-  --tech-top-dent: var(--top-dent);
-  --tech-top-dent-length: 20%;  
-  background-color: white;
-  background-image: paint(tech-panel);
-  }
-  
-   body > div:nth-child(5) > q-html > div > div.w3-white.w3-quarter.w3-nav.w3-col.w3-right.w3-padding > ul > li::hover {
-	 
-	    --shadow-color: green;
-		--top-dent: 30px
+		
+		
+		document.addEventListener("QHTMLContentLoaded", function() { 
 	
-  --tech-interpolated-percentage: 0.5;
-  --tech-width: 3px;
- --tech-shadow-color: var(--shadow-color);
-  --tech-border-color: var(--shadow-color);
-  --tech-pattern-shift: 0px 50px;
-  --tech-top-dent: var(--top-dent);
-  --tech-top-dent-length: 40%;  
-  background-color: black;
-  background-image: paint(tech-panel);
-  }
-  
-  
-  
- 
-  
-  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(2) {
-    --shadow-color: black
-    --tech-top-left: 0px 0px;
-  --tech-top-right: 20px 20px;
-  --tech-bottom-right: 20px;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 0px 0px;
-  --tech-width: 1px;
-   --tech-shadow-color: black;
-  --tech-border-color: transparent;
-  --tech-pattern-shift: 0px 50px;
-  --tech-top-dent: 0px;
-  --tech-top-dent-length: 0%;  
-  background: paint(tech-panel);
-  }
-   body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(1) {
-    --tech-top-left: 0px 0px;
-  --tech-top-right: 0px 0px;
-  --tech-bottom-right: 0px;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 0px 0px;
-  --tech-width: 1px;
-   --tech-shadow-color: black;
-  --tech-border-color: transparent;
-  --tech-pattern-shift: 0px 50px;
-  --tech-top-dent: 0px;
-  --tech-top-dent-length: 0%;                                                           
-  background: paint(tech-panel);
-  }
-  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(1):hover {
-     --shadow-color: green;
-	 
-	     --tech-top-left: 0px 0px;
-  --tech-top-right: 0px 0px;
-  --tech-bottom-right: 0px;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 0px 0px;
-  --tech-width: 1px;
-   --tech-shadow-color: var(--shadow-color);
-  background-image: paint(tech-panel);
-  }
-  body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div > div:nth-child(2):hover {
-     --shadow-color: green;
-	    --tech-top-left: 0px 0px;
-  --tech-top-right: 20px 20px;
-  --tech-bottom-right: 20px;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 0px 0px;
-  --tech-width: 1px;
-  background-image: paint(tech-panel);
-  }
- body > div:nth-child(5) > q-html > div > div.w3-panel.w3-card > div {
-    --tech-top-left: -20px -20px;
-  --tech-top-right: 20px 20px;
-  --tech-bottom-right: 15vh;
-  --tech-interpolated-percentage: 0.5;
-  --tech-bottom-left: 0px 0px;
-  --tech-width: 1px;
-  --tech-shadow-color: black;
-  --tech-border-color: black;
-  --tech-pattern-shift: -30px -50px;
-  --tech-top-dent: 15px;
-  --tech-top-dent-length: 20%;  
-  background: paint(tech-panel);
-  }
-  div.w3-panel {
-     transition: --top-dent 3.5s, --shadow-color 3s,   --top-left 2s, --bottom-right 3s;
-	 --shadow-color: black;
-	 --top-left: 0px 0px;
-	 --top-dent: 0px;
-	 --bottom-right: 0px;
-	 background: paint(tech-panel);
-  }
-  div.w3-panel:hover {
-     --tech-width: 2px;
-	 --shadow-color: green;
-	 --tech-top-left: var(--top-left) var(--top-left);
-	 --tech-bottom-right: var(--bottom-right);
-	 --tech-border-color: var(--shadow-color);
-	 --top-dent-length: 50%;
-	 --top-dent: 25px;
-	 --tech-top-dent: var(--top-dent);
-	 --top-left: 25px 25px;
-	 
-	 background-image: paint(tech-panel);
-  }
-   @keyframes borderTransition {
-            0% {
-              
-                --tech-shadow-color: #000;
-            }
-            100% {
-              
-                --tech-shadow-color: green;
-              
-            }
-        }
-	</style>
-</div>
+	document.querySelector("#welcomeExample01qhtmlCodeBox").value = `
+<q-html>
+	button {
+	    text: "Click Here!"
+	    onclick: "alert('Hello world!')"
+	}
+</q-html>`
 
-</body></html>
+document.querySelector("#welcomeExample02qhtmlCodeBox").value = `
+<q-html>
+	div {
+		style: "width: 120px; background-color: blue"
+		text: "Here's a Container div"
+		br { }
+		a {
+			href: "#"
+			onclick: "alert('hello world!')"
+			text: "Click here"
+		}
+		br { }
+		a,button {
+			href: "#"
+			onclick: "alert('hello world!')"
+			text: "or here!"
+		}
+	}
+</q-html>
+`
 
-
-
-
+document.querySelector("#welcomeExample03qhtmlCodeBox").value = `
+	
+		w3-panel,w3-card,w3-form,w3-grey,div {
+			w3-panel,w3-grey {
+				span {
+					text: "First Name";
+					w3-hover-blue,w3-input,input {
+						type: "text"
+						name: "firstName"
+					}
+				}
+				span {
+					text: "Nickname ";
+					w3-hover-blue,w3-input,input {
+						type: "text";
+						name: "Nickname";
+					}
+				}
+				span {
+					text: "Submit Results ";
+					w3-hover-blue,w3-input,w3-button,input {
+						type: "submit";
+					
+					}
+				}
+			}
+		}`
+		
+		
+		
+		
+	})
+		
+</script>
+	</body>
+	</html>
