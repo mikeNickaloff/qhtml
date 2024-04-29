@@ -8,7 +8,8 @@ I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 - Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
 
-- For Demo and code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
+- For code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
+- For Official API / Documentation <a href="https://mikeNickaloff.github.io/qhtml">https://mikeNickaloff.github.io/qhtml/</a>
 
 **Basic Structure:**
 
