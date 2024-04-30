@@ -46,13 +46,13 @@ class QHtmlElement extends HTMLElement {
     function replaceBackticksWithQuotes(input) {
         // This replaces all backtick-enclosed strings with double-quoted strings.
         // It assumes all `${}` expressions are already evaluated or replaced.
-        return input.replace(/`([^`]*)`/g, (match, p1) => `"${p1}"`);
+        return input.replace(/`([^`]*)`/g, (match, p1) => (eval(p1)));
     }
 
     let preprocessedInput = addSemicolonToProperties(i_qhtml);
    // preprocessedInput = evaluateTemplateStrings(preprocessedInput);
-    //preprocessedInput = replaceBackticksWithQuotes(preprocessedInput);
-    let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput);
+    let preprocessedInput3 = replaceBackticksWithQuotes(preprocessedInput);
+    let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput3);
 
     return preprocessedInput2;
 }
@@ -408,133 +408,33 @@ function storeAndExecuteScriptLater(scriptContent) {
 const componentRegistry = {};
 
 class QComponent extends HTMLElement {
-    constructor() {
-        super();
-        this.defined = false
-
-            this.observer = new MutationObserver(() => this.updateInstances());
-        this.observer.observe(this, {
-            childList: true,
-            subtree: true
-        });
-    }
-
     connectedCallback() {
-
-        //  this.updateDefinition();
-    }
-    render() {
-        if (this.defined == false) {
-            const id = this.getAttribute('id');
-            customElements.define(`${id}`, createQComponentClass());
-            document.querySelectorAll(`${id}`).forEach(function (item) {
-                item.innerHTML = this.innerHTML
-            })
-            this.defined = true;
-        }
-        this.updateDefinition();
-        const id = this.getAttribute('id');
-
-    }
-    disconnectedCallback() {
-        this.observer.disconnect();
-        this.invalidateInstances();
-    }
-
-    static get observedAttributes() {
-        return ['id'];
-    }
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'id') {
-            this.updateDefinition(oldValue, newValue);
-            this.invalidateInstances(oldValue);
+        const componentName = this.getAttribute('id');
+        if (componentName && !customElements.get(componentName)) {
+            const templateContent = this.innerHTML;
+            this.registerCustomElement(componentName, templateContent);
+            this.innerHTML = ''; // Clear the initial content to avoid duplication
         }
     }
 
-    updateDefinition(oldId, newId) {
-        const id = newId || this.getAttribute('id');
-        if (!id)
-            return;
+    registerCustomElement(name, content) {
+        const elementClass = this.createCustomElementClass(content);
+        customElements.define(name, elementClass);
+    }
 
-        if (oldId && componentRegistry[oldId]) {
-            delete componentRegistry[oldId];
-        }
-
-        const templateContent = this.innerHTML;
-        componentRegistry[id] = {
-            content: templateContent,
-            instances: []
+    createCustomElementClass(content) {
+        return class extends HTMLElement {
+            connectedCallback() {
+                this.innerHTML = content;
+            }
         };
-
-    }
-
-    updateInstances() {
-        const id = this.getAttribute('id');
-        if (!id || !componentRegistry[id])
-            return;
-
-        componentRegistry[id].content = this.innerHTML;
-        componentRegistry[id].instances.forEach(instance => {
-            instance.innerHTML = this.innerHTML;
-        });
-    }
-
-    invalidateInstances(oldId) {
-        const id = oldId || this.getAttribute('id');
-        if (!id || !componentRegistry[id])
-            return;
-
-        componentRegistry[id].instances.forEach(instance => {
-            instance.innerHTML = "<div>Invalid component</div>";
-        });
-
-        if (!oldId)
-            delete componentRegistry[id];
     }
 }
 
 customElements.define('q-component', QComponent);
 
-//unused
-function createQComponentClass() {
-    return class extends HTMLElement {
-        constructor() {
-            super();
-        }
 
-        connectedCallback() {
-            this.applyClassesRecursively(this, []);
-        }
 
-        applyClassesRecursively(element, classes) {
-            // Add the current element's classes to the array
-            if (element.tagName.startsWith('q-')) {
-                const classToAdd = element.tagName.toLowerCase().replace('q-', 'q-');
-                classes.push(classToAdd);
-            }
-
-            // Iterate over each child
-            Array.from(element.children).forEach((child) => {
-                if (child.tagName.startsWith('q-')) {
-                    // If child is a W3 element, recursively apply classes
-                    this.applyClassesRecursively(child, [...classes]);
-                } else {
-                    // Apply all collected classes to the final non-W3 element
-                    child.classList.add(...classes);
-                }
-            });
-
-            // If the element is a W3 element, remove it after processing its children
-            if (element.tagName.startsWith('W3-') && element.parentNode) {
-                Array.from(element.children).forEach((child) => {
-                    element.parentNode.insertBefore(child, element);
-                });
-                element.parentNode.removeChild(element);
-            }
-        }
-    };
-}
 // renders all HTML in-place of any q-html  then dispatch event when qhtml conversion is complete
 window.addEventListener("DOMContentLoaded", function () {
 
