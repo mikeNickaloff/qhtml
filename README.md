@@ -8,8 +8,9 @@ I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 - Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
 
-- For code editor:  <a href="https://mikeNickaloff.github.io/qhtml/demo.html">click here!</a>
-- For Official API / Documentation <a href="https://mikeNickaloff.github.io/qhtml">https://mikeNickaloff.github.io/qhtml/</a>
+- For code editor:  <a href="https://www.datafault.net/qhtml/demo.html">click here!</a>
+- For Official API / Documentation / Examples
+   <a href="https://www.datafault.net/qhtml">https://www.datafault.net/qhtml/</a>
 
 **Basic Structure:**
 
@@ -123,6 +124,45 @@ Converted to HTML:
             <p><center><a href="https://www.example.com">Visit Example</a></center></p>
 
 
- Currently planned features for later release:
+q-components:
 
- - Re-usable Custom Component definitions from q-html
+   
+      q-component {
+			     id: "text-bar";
+			     div {
+			        class: "w3-bar w3-blue";
+			        span {
+					         text: "Text in a bar";
+			        }
+			    }
+		 }
+		
+		div {
+		  text-bar {
+		  
+		  }
+		  br { }
+		  text-bar {
+		  
+		  }
+		}
+
+Result:
+
+    <div>
+      <div class="w3-bar w3-blue">
+        <span>Text in a bar</span>
+      </div>
+      <br></br>
+      <div class="w3-bar w3-blue">
+        <span>Text in a bar</span>
+      </div>
+    </div>
+
+
+ Currently planned features for later release:
+ - q-script
+ - extend q-script support to allow for javascript/q-script to be used directly with QHTML for rapid generation
+ - q-query language that will allow for the access of QHTML text before rendering it into HTML, allowing it to be manipulated first
+ - Additional q-components as well as integration with q-script and q-query
+
