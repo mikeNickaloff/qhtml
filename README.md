@@ -68,9 +68,8 @@ Important Points:
 - The content/text attribute is special in qHTML. It represents the inner text of an element.
 
 - All properties are surrounded with double-quotes and can have anything within the quotes
-- Scripts do not require a 'text' or 'content' property.
-- Scripts behave the same as any other script tags, supporting defer, inline, and immediate execution. 
-- Modules are not supported.
+- Place scripts in <script> blocks outside of QHTML (for now until q-script is added)
+- Reference script return values using backticks like this... <pre> text: `myscript()` </pre>
 
 Example:
 
