@@ -23,39 +23,39 @@ class QHtmlElement extends HTMLElement {
 
     }
 
- preprocess(i_qhtml) {
-    function addSemicolonToProperties(input) {
-        const regex = /(\w+)\s*:\s*("[^"]*")(?!;)/g;
-        return input.replace(regex, "$1: $2;");
+    preprocess(i_qhtml) {
+        function addSemicolonToProperties(input) {
+            const regex = /(\w+)\s*:\s*("[^"]*")(?!;)/g;
+            return input.replace(regex, "$1: $2;");
+        }
+
+        function evaluateTemplateStrings(input) {
+            const templateRegex = /\$\{([^}]+)\}/g;
+            return input.replace(templateRegex, (match, expr) => {
+                try {
+                    // Using `eval` to evaluate the expression inside ${}.
+                    // Be sure that this is safe in your context before using!
+                    return eval(expr);
+                } catch (error) {
+                    console.error('Error evaluating expression:', expr);
+                    return "";
+                }
+            });
+        }
+
+        function replaceBackticksWithQuotes(input) {
+            // This replaces all backtick-enclosed strings with double-quoted strings.
+            // It assumes all `${}` expressions are already evaluated or replaced.
+            return input.replace(/`([^`]*)`/g, (match, p1) => (eval(p1)));
+        }
+
+        let preprocessedInput = addSemicolonToProperties(i_qhtml);
+        // preprocessedInput = evaluateTemplateStrings(preprocessedInput);
+        let preprocessedInput3 = replaceBackticksWithQuotes(preprocessedInput);
+        let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput3);
+
+        return preprocessedInput2;
     }
-
-    function evaluateTemplateStrings(input) {
-        const templateRegex = /\$\{([^}]+)\}/g;
-        return input.replace(templateRegex, (match, expr) => {
-            try {
-                // Using `eval` to evaluate the expression inside ${}.
-                // Be sure that this is safe in your context before using!
-                return eval(expr);
-            } catch (error) {
-                console.error('Error evaluating expression:', expr);
-                return "";
-            }
-        });
-    }
-
-    function replaceBackticksWithQuotes(input) {
-        // This replaces all backtick-enclosed strings with double-quoted strings.
-        // It assumes all `${}` expressions are already evaluated or replaced.
-        return input.replace(/`([^`]*)`/g, (match, p1) => (eval(p1)));
-    }
-
-    let preprocessedInput = addSemicolonToProperties(i_qhtml);
-   // preprocessedInput = evaluateTemplateStrings(preprocessedInput);
-    let preprocessedInput3 = replaceBackticksWithQuotes(preprocessedInput);
-    let preprocessedInput2 = this.transformComponentDefinitions(preprocessedInput3);
-
-    return preprocessedInput2;
-}
 
     // unused for now
     transformComponentDefinitions(input) {
@@ -127,14 +127,14 @@ class QHtmlElement extends HTMLElement {
             let segmentStart = 0;
             let currentProperty = null;
             var isHTML = false;
-			var isCSS = false;
-			var cssNestingLevel = 0;
+            var isCSS = false;
+            var cssNestingLevel = 0;
             var htmlString = "";
-			var intick = false;
+            var intick = false;
 
             for (let i = 0; i < input.length; i++) {
                 if (isHTML) {
-				if (input[i] === "}") {
+                    if (input[i] === "}") {
                         isHTML = false;
                         currentProperty.content = encodeURIComponent(htmlString);
                         segments.push(currentProperty);
@@ -145,113 +145,117 @@ class QHtmlElement extends HTMLElement {
                         i = -1; // Reset loop index
                         continue;
                     } else {
-					   if (input[i] === "`") {
-					    if (intick) { intick = false; } else { intick = true; }
-					   
-					   } else {
-					       if (intick) {
-								htmlString = htmlString.concat(input[i]);
-								continue;
-						   } else {
-						     continue;
-						   }
-					   }
-                    }
-                } 
-				if (isCSS) {
-					if (input[i] === "}") {
-						cssNestingLevel--;
-						if (cssNestingLevel == 0) {
-							isCSS = false;
-							currentProperty.content = encodeURIComponent(htmlString);
-							segments.push(currentProperty);
-							currentProperty = null;
+                        if (input[i] === "`") {
+                            if (intick) {
+                                intick = false;
+                            } else {
+                                intick = true;
+                            }
 
-                        // Reset input to process remaining elements/properties
-							input = input.substring(i + 1);
-							i = -1; // Reset loop index
-							continue;
-						} else  {
-							input = input.substring(i + 1);
-							i = -1; // Reset loop index
-							htmlString = htmlString.concat(input[i]);
-						}
-                    } else {
-					   if (input[i] === "{") {
-						cssNestingLevel++;
-						continue;
-					   
-					   } else {
-					     	htmlString = htmlString.concat(input[i]);
-								continue;	
-					   }
-                    }
-				} else {
-                if (input[i] === "{") {
-                    nestedLevel++;
-                    if (nestedLevel === 1) {
-                        segmentStart = i + 1; // Start after the opening brace
-                        const tag = input.substring(0, i).trim();
-                        if (tag === "html") {
-
-                            currentProperty = {
-                                type: 'html',
-                                tag,
-                                content: ''
-                            };
-                            isHTML = true;
-                            htmlString = "";
-                            continue;
-                        } else if (tag === "css") {
-						 currentProperty = {
-                                type: 'css',
-                                tag,
-                                content: ''
-                            };
-							isCSS - true;
-							cssNestingLevel = 1;
-							htmlString = "";
-							continue;
-						
-					} else {
-                            currentProperty = {
-                                type: 'element',
-                                tag,
-                                content: ''
-                            };
+                        } else {
+                            if (intick) {
+                                htmlString = htmlString.concat(input[i]);
+                                continue;
+                            } else {
+                                continue;
+                            }
                         }
                     }
-                } else if (input[i] === "}") {
-                    nestedLevel--;
-                    if (nestedLevel === 0 && currentProperty !== null) {
-                        // When closing an element, add its content and reset currentProperty
-                        currentProperty.content = input.substring(segmentStart, i).trim();
-                        segments.push(currentProperty);
-                        currentProperty = null;
+                }
+                if (isCSS) {
+                    if (input[i] === "}") {
+                        cssNestingLevel--;
+                        if (cssNestingLevel == 0) {
+                            isCSS = false;
+                            currentProperty.content = encodeURIComponent(htmlString);
+                            segments.push(currentProperty);
+                            currentProperty = null;
 
-                        // Reset input to process remaining elements/properties
-                        input = input.substring(i + 1).trim();
-                        i = -1; // Reset loop index
+                            // Reset input to process remaining elements/properties
+                            input = input.substring(i + 1);
+                            i = -1; // Reset loop index
+                            continue;
+                        } else {
+                            input = input.substring(i + 1);
+                            i = -1; // Reset loop index
+                            htmlString = htmlString.concat(input[i]);
+                        }
+                    } else {
+                        if (input[i] === "{") {
+                            cssNestingLevel++;
+                            continue;
+
+                        } else {
+                            htmlString = htmlString.concat(input[i]);
+                            continue;
+                        }
                     }
-                } else if (nestedLevel === 0 && input[i] === ":") {
-                    // Handle properties only at the root level (nestedLevel === 0)
-                    let propEnd = input.indexOf(";", i);
-                    if (propEnd !== -1) {
-                        let propertySegment = input.substring(0, propEnd + 1);
-                        let [name, value] = propertySegment.split(":").map(s => s.trim());
-                        value = value.replace(/";$/, "").replace(/^"/, "");
-                        segments.push({
-                            type: 'property',
-                            name,
-                            value
-                        });
+                } else {
+                    if (input[i] === "{") {
+                        nestedLevel++;
+                        if (nestedLevel === 1) {
+                            segmentStart = i + 1; // Start after the opening brace
+                            const tag = input.substring(0, i).trim();
+                            if (tag === "html") {
 
-                        // Adjust the remaining input and restart the loop
-                        input = input.substring(propEnd + 1).trim();
-                        i = -1;
+                                currentProperty = {
+                                    type: 'html',
+                                    tag,
+                                    content: ''
+                                };
+                                isHTML = true;
+                                htmlString = "";
+                                continue;
+                            } else if (tag === "css") {
+                                currentProperty = {
+                                    type: 'css',
+                                    tag,
+                                    content: ''
+                                };
+                                isCSS - true;
+                                cssNestingLevel = 1;
+                                htmlString = "";
+                                continue;
+
+                            } else {
+                                currentProperty = {
+                                    type: 'element',
+                                    tag,
+                                    content: ''
+                                };
+                            }
+                        }
+                    } else if (input[i] === "}") {
+                        nestedLevel--;
+                        if (nestedLevel === 0 && currentProperty !== null) {
+                            // When closing an element, add its content and reset currentProperty
+                            currentProperty.content = input.substring(segmentStart, i).trim();
+                            segments.push(currentProperty);
+                            currentProperty = null;
+
+                            // Reset input to process remaining elements/properties
+                            input = input.substring(i + 1).trim();
+                            i = -1; // Reset loop index
+                        }
+                    } else if (nestedLevel === 0 && input[i] === ":") {
+                        // Handle properties only at the root level (nestedLevel === 0)
+                        let propEnd = input.indexOf(";", i);
+                        if (propEnd !== -1) {
+                            let propertySegment = input.substring(0, propEnd + 1);
+                            let [name, value] = propertySegment.split(":").map(s => s.trim());
+                            value = value.replace(/";$/, "").replace(/^"/, "");
+                            segments.push({
+                                type: 'property',
+                                name,
+                                value
+                            });
+
+                            // Adjust the remaining input and restart the loop
+                            input = input.substring(propEnd + 1).trim();
+                            i = -1;
+                        }
                     }
                 }
-				}
             }
             console.log(JSON.stringify(segments))
             return segments;
@@ -266,7 +270,7 @@ class QHtmlElement extends HTMLElement {
                         parentElement.setAttribute(segment.name, segment.value);
 
                     } else {
-					
+
                         parentElement.setAttribute(segment.name, segment.value);
                     }
                 }
@@ -277,11 +281,11 @@ class QHtmlElement extends HTMLElement {
                     // Recursively create nested elements for each tag
                     let currentParent = parentElement;
                     tags.forEach(tag => {
-						function getTagNameFromHTML(htmlSnippet) {
-    var regex = /<(\w+)[\s>]/;
-    var match = htmlSnippet.match(regex);
-    return match ? match[1].toLowerCase() : '';
-}
+                        function getTagNameFromHTML(htmlSnippet) {
+                            var regex = /<(\w+)[\s>]/;
+                            var match = htmlSnippet.match(regex);
+                            return match ? match[1].toLowerCase() : '';
+                        }
                         const newElement = document.createElement(getTagNameFromHTML(tag) === '' ? tag : getTagNameFromHTML(tag));
                         currentParent.appendChild(newElement);
                         currentParent = newElement; // Update the current parent to the newly created element
@@ -290,11 +294,11 @@ class QHtmlElement extends HTMLElement {
                     const childSegments = extractPropertiesAndChildren(segment.content);
                     childSegments.forEach(childSegment => processSegment(childSegment, currentParent));
                 } else {
-function getTagNameFromHTML(htmlSnippet) {
-    var regex = /<(\w+)[\s>]/;
-    var match = htmlSnippet.match(regex);
-    return match ? match[1].toLowerCase() : '';
-}
+                    function getTagNameFromHTML(htmlSnippet) {
+                        var regex = /<(\w+)[\s>]/;
+                        var match = htmlSnippet.match(regex);
+                        return match ? match[1].toLowerCase() : '';
+                    }
                     const newElement = document.createElement(getTagNameFromHTML(segment.tag) === '' ? segment.tag : getTagNameFromHTML(segment.tag));
 
                     if (segment.tag === 'script' || segment.tag === 'q-painter') {
@@ -319,7 +323,7 @@ function getTagNameFromHTML(htmlSnippet) {
                     newElement.innerHTML += segment.content;
                     parentElement.appendChild(newElement);
                 }
-				if (segment.type === 'css') {
+                if (segment.type === 'css') {
                     //const newElement = document.createElement("div");
                     //newElement.innerHTML += segment.content;
                     parentElement.setAttribute("style", segment.content);
@@ -409,31 +413,90 @@ const componentRegistry = {};
 
 class QComponent extends HTMLElement {
     connectedCallback() {
+	this.style.display = 'none';
         const componentName = this.getAttribute('id');
+		var slots = [];
+		try {
+			slots = this.getAttribute('slots').split(',');
+		} catch {
+		    slots = [];
+		}
         if (componentName && !customElements.get(componentName)) {
             const templateContent = this.innerHTML;
-            this.registerCustomElement(componentName, templateContent);
-            this.innerHTML = ''; // Clear the initial content to avoid duplication
+            this.registerCustomElement(componentName, templateContent,slots);
+            this.outerHTML = ''; // Clear the initial content to avoid duplication
         }
     }
 
-    registerCustomElement(name, content) {
-        const elementClass = this.createCustomElementClass(content);
+    registerCustomElement(name, content,slots) {
+        const elementClass = this.createCustomElementClass(name, content, slots);
         customElements.define(name, elementClass);
     }
 
-    createCustomElementClass(content) {
+    createCustomElementClass(name, content, slots) {
+        var myAttributes = {
+            "slot": this.innerHTML
+        }
+		slots.forEach(function(attr) { myAttributes[attr] = ""; })
         return class extends HTMLElement {
-            connectedCallback() {
+            constructor() {
+                super();
                 this.innerHTML = content;
+                // Set attributes on the new element
+                //    this.setAttributes(attributes);
             }
+            static get observedAttributes() {
+                return ['slot'].concat(slots);
+            }
+
+            attributeChangedCallback(name, oldValue, newValue) {
+                if (name === 'slot') {
+                    this.replaceSlotContent(["slot"])
+                }
+				if (slots.indexOf(name) != -1) { 
+					this.replaceCustomSlotContent([name])
+				}
+            }
+
+            connectedCallback() {
+                this.replaceSlotContent(["slot"]);
+				try {
+					slots.forEach(function(t_slot) { this.replaceCustomSlotContent(t_slot); });
+				} catch {
+					
+				}
+            }
+
+            setAttributes(attributes) {
+                for (const [key, value] of Object.entries(myAttributes)) {
+                    this.setAttribute(key, value);
+                }
+            }
+
+            replaceSlotContent(attributes) {
+                // Replace the innerHTML of elements with slot attributes matching q-component attributes
+
+                const slotElements = this.querySelectorAll("slot");
+                slotElements.forEach(elem => {
+                    elem.innerHTML = this.getAttribute("slot");
+                });
+
+            }
+			
+			
+			replaceCustomSlotContent(slotName) {
+			
+			const slotElements = this.querySelectorAll(slotName);
+                slotElements.forEach(elem => {
+                    elem.innerHTML = this.getAttribute(slotName);
+                });
+			}
         };
     }
+
 }
 
 customElements.define('q-component', QComponent);
-
-
 
 // renders all HTML in-place of any q-html  then dispatch event when qhtml conversion is complete
 window.addEventListener("DOMContentLoaded", function () {
