@@ -127,35 +127,35 @@ q-components:
 
    
       q-component {
-                             slots: "custom-slot1,custom-slot2";
-			     id: "text-bar";
-			     div {
-			        class: "w3-bar w3-blue";
-			        span {
-				    custom-slot1 {
+	     slots: "custom-slot1,custom-slot2";
+	     id: "text-bar";
+	     div {
+		class: "w3-bar w3-blue";
+		span {
+		    custom-slot1 {
 
-			            }
-			        }
-		               div {
-	                           custom-slot2 {
-
-                                   }
-			       }
-			    }
-		 }
-		
-		div {
-		  text-bar {
-		      custom-slot1: "slot 1 text";
-                      custom-slot2: "slot 2 text";
-		  }
-		  br { }
-		  text-bar {
-                      custom-slot1: "some other text for slot 1";
-                      custom-slot2: "and the other slot 2 text";
-		  
-		  }
+		    }
 		}
+	       div {
+		   custom-slot2 {
+
+		   }
+	       }
+	    }
+      }
+		
+	div {
+	  text-bar {
+	      custom-slot1: "slot 1 text";
+	      custom-slot2: "slot 2 text";
+	  }
+	  br { }
+	  text-bar {
+	      custom-slot1: "some other text for slot 1";
+	      custom-slot2: "and the other slot 2 text";
+	  
+	  }
+	}
 
 Result:
 
