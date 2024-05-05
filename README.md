@@ -127,36 +127,59 @@ q-components:
 
    
       q-component {
+                             slots: "custom-slot1,custom-slot2";
 			     id: "text-bar";
 			     div {
 			        class: "w3-bar w3-blue";
 			        span {
-					         text: "Text in a bar";
+				    custom-slot1 {
+
+			            }
 			        }
+		               div {
+	                           custom-slot2 {
+
+                                   }
+			       }
 			    }
 		 }
 		
 		div {
 		  text-bar {
-		  
+		      custom-slot1: "slot 1 text";
+                      custom-slot2: "slot 2 text";
 		  }
 		  br { }
 		  text-bar {
+                      custom-slot1: "some other text for slot 1";
+                      custom-slot2: "and the other slot 2 text";
 		  
 		  }
 		}
 
 Result:
 
-    <div>
-      <div class="w3-bar w3-blue">
-        <span>Text in a bar</span>
-      </div>
-      <br></br>
-      <div class="w3-bar w3-blue">
-        <span>Text in a bar</span>
-      </div>
-    </div>
+  	<text-bar custom-slot1="slot 1 text" custom-slot2="slot 2 text">
+            <div class="w3-bar w3-blue">
+	       <span>
+	         <custom-slot1>slot 1 text</custom-slot1>
+	      </span>
+           <div>
+	       <custom-slot2>slot 2 text</custom-slot2>
+	  </div>
+       </div></text-bar>
+       
+       <br>
+       <text-bar custom-slot1="some other text for slot 1" custom-slot2="and the other slot 2 text">
+          <div class="w3-bar w3-blue">
+	    <span>
+               <custom-slot1>some other text for slot 1</custom-slot1>
+	    </span>
+            <div>
+	       <custom-slot2>and the other slot 2 text</custom-slot2>
+	    </div>
+          </div>
+	</text-bar>
 
 
  Currently planned features for later release:
