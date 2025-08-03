@@ -8,9 +8,9 @@ I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 - Extending qHTML is super easy as well - just define a new custom component and it will become available along with all of its inline attributes without having to even interact with qHTML. 
 
-- For code editor:  <a href="https://www.datafault.net/qhtml/demo.html">click here!</a>
+- For code editor:  <a href="https://mikenickaloff.github.io/qhtml/demo.html">click here!</a>
 - For Official API / Documentation / Examples
-   <a href="https://www.datafault.net/qhtml">https://www.datafault.net/qhtml/</a>
+   <a href="https://mikenickaloff.github.io/qhtml/">*https://mikenickaloff.github.io/qhtml/*</a>
 
 **Basic Structure:**
 
@@ -187,4 +187,5 @@ Result:
  - extend q-script support to allow for javascript/q-script to be used directly with QHTML for rapid generation
  - q-query language that will allow for the access of QHTML text before rendering it into HTML, allowing it to be manipulated first
  - Additional q-components as well as integration with q-script and q-query
+
 
