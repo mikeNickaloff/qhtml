@@ -1,3 +1,9 @@
+**This Repo has been moved to **
+<h2><a href="https://www.github.com/qhtml/qhtml.js">https://www.github.com/qhtml/qhtml.js</a></h2>
+
+
+
+<H3> This is kept for historical purposes only.</H3>
 I**ntroduction to Quick HTML: *The Quick Inline HyperText Markup Language***
 
 - qHTML is a simplified, custom representation of HTML designed for ease of reading and maintainence. Its structure and syntax are similar to CSS, but instead of styles, it defines HTML structure and attributes inline. 
@@ -187,5 +193,6 @@ Result:
  - extend q-script support to allow for javascript/q-script to be used directly with QHTML for rapid generation
  - q-query language that will allow for the access of QHTML text before rendering it into HTML, allowing it to be manipulated first
  - Additional q-components as well as integration with q-script and q-query
+
 
 
